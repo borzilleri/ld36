@@ -20,7 +20,7 @@ public class Chronolabe : MonoBehaviour, UsableObject
 	// Use this for initialization
 	void Start ()
 	{
-		ghosts = new List<GhostController> ();
+		ghosts = new List<PlayerController> ();
 		Duration = 60 * 10;
 	}
 	
@@ -34,7 +34,7 @@ public class Chronolabe : MonoBehaviour, UsableObject
 			if (recordingCount > Duration) {
 				isRecording = false;
 				recordingCount = 0;
-				ghosts.Add (GhostController.Create (currentActions, currentSpawn));
+//				ghosts.Add (GhostController.Create (currentActions, currentSpawn));
 				user = null;
 			} else {
 				currentActions.Add (user.lastAction);
