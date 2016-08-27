@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
-	public static Object ghostPrefab;
+	public GameObject ghostPrefab;
 
 	private Vector3 spawnPoint;
 	private PlayerFrameAction[] actions;
@@ -19,19 +19,25 @@ public class PlayerController : MonoBehaviour
 	bool isUsing;
 	public bool isGhost = false;
 
-//	public static PlayerController CreateGhost (List<PlayerFrameAction> actions, Vector3 spawn)
-//	{
-//		GameObject newObj = Instantiate (ghostPrefab) as GameObject;
-//		newObj.SetActive (false);
-//		GhostController ghost = newObj.GetComponent<GhostController> ();
-//		ghost.spawnPoint = spawn;
-//		ghost.actions = actions;
-//		return ghost;
-//	}
+	public Chronolabe chronolabe;
+
+	private UsableObject collidingWith = null;
+
+	public PlayerController CreateGhost (PlayerFrameAction[] actions, Vector3 spawn)
+	{
+		GameObject newObj = Instantiate (ghostPrefab) as GameObject;
+		PlayerController ghost = newObj.GetComponent<PlayerController> ();
+		ghost.isGhost = true;
+		ghost.actions = actions;
+		ghost.spawnPoint = spawn;
+		ghost.Reset ();
+		return ghost;
+	}
 
 	void Awake ()
 	{
-		ghostPrefab = Resources.Load ("Prefabs/Player");
+		Debug.Log ("Loading Player prefab");
+		//ghostPrefab = Resources.Load ("Assets/GameObjects/Player/Player");
 	}
 
 	// Use this for initialization
@@ -41,15 +47,24 @@ public class PlayerController : MonoBehaviour
 		rb2d = GetComponent<Rigidbody2D> ();
 	}
 
-	public void StartRecording (int duration)
+	public void StartRecording (int duration, Chronolabe labe)
 	{
+		this.chronolabe = labe;
 		actions = new PlayerFrameAction[duration];
 		actionCount = 0;
 		spawnPoint = gameObject.transform.position;
 		isRecording = true;
 	}
 
+	public void StopRecording() {
+		Chronolabe labe = this.chronolabe;
+		this.chronolabe = null;
+		labe.AddGhost (CreateGhost (actions, spawnPoint));
+		isRecording = false;
+	}
+
 	public void Activate() {
+		Debug.Log ("Activaing ghost.");
 		gameObject.SetActive (true);
 	}
 
@@ -61,62 +76,70 @@ public class PlayerController : MonoBehaviour
 	
 	void Update ()
 	{
-//		lastAction = new PlayerFrameAction ();
-//
-//		if (isGhost) {
-//			if (gameObject.activeSelf && actionCount <= actions.Count) {
-//				isUsing = actions [actionCount].isUsing;
-//			}
-//		} else {
-//			isUsing = Input.GetButton ("space");
-//			lastAction.isUsing = isUsing;
-//		}
+		if (isGhost) {
+			if (gameObject.activeSelf && actionCount < actions.Length) {
+				isUsing = actions [actionCount].isUsing;
+			}
+		} else {
+			isUsing = Input.GetButton ("Action");
+			lastAction.isUsing = isUsing;
+		}
 	}
 
 	void FixedUpdate ()
 	{
-//		Vector2 movement;
-//		if (isGhost ) {
-//			if( gameObject.activeSelf && actionCount <= actions.Count) {
-//				movement = actions [actionCount].movement;
-//			}
-//		} else {
-//			float moveHorizontal = Input.GetAxis ("Horizontal");
-//			float moveVertical = Input.GetAxis ("Vertical");
-//			movement = new Vector2 (moveHorizontal, moveVertical) * speed;
-//			if (isRecording) {
-//				lastAction.movement = movement;
-//			}
-//		}
-//		rb2d.AddForce (movement);
-//	}
-//
-//	void LateUpdate ()
-//	{
-//		if (isRecording) {
-//			actions [actionCount] = lastAction;
-//			// Do we need to stop recording?
-//			if (actionCount == actions.GetLength - 1) {
-//			}
-//		}
-//		if (isGhost && gameObject.activeSelf && actionCount >= actions.GetLength) {
-//			// We're done with playback, reset 
-//			Reset();
-//		}
-//		actionCount += 1;
-//
-//		if (isUsing) {
-//			// Use whatever collider we're near.
-//		}
+		Vector2 movement = Vector2.zero;
+		if (isGhost ) {
+			if( gameObject.activeSelf && actionCount < actions.Length) {
+				movement = actions [actionCount].movement;
+			}
+		} else {
+			float moveHorizontal = Input.GetAxis ("Horizontal");
+			float moveVertical = Input.GetAxis ("Vertical");
+			movement = new Vector2 (moveHorizontal, moveVertical) * speed;
+			if (isRecording) {
+				lastAction.movement = movement;
+				Debug.LogFormat("Recording Frame: {0}, Vector: {1} ", actionCount, lastAction.movement.ToString ());
+			}
+		}
+		rb2d.AddForce (movement);
 	}
 
-	void OnTriggerEnter2D (Collider2D other)
+	void LateUpdate ()
 	{
+		if (!isGhost && isRecording) {
+			Debug.LogFormat("Recording Frame: {0}, Vector: {1} ", actionCount, lastAction.movement.ToString ());
+			actions [actionCount] = lastAction;
+			lastAction = new PlayerFrameAction ();
+			// Do we need to stop recording?
+			if (actionCount == actions.Length - 1) {
+				StopRecording ();
+			}
+		}
+		if (isGhost && gameObject.activeSelf && actionCount >= actions.Length) {
+			// We're done with playback, reset 
+			Reset();
+		}
+		actionCount += 1;
+
+		if (isUsing && null != collidingWith) {
+			Debug.Log ("Using object");
+			collidingWith.Use (gameObject);
+		}
 	}
 
-	void OnTriggerExit2D (Collider2D other)
+	void OnCollisionExit2D (Collision2D other)
 	{
-//		other.gameObject.GetComponent ();
+		Debug.Log ("Uncolliding with object");
+		collidingWith = null;
+	}
+
+	void OnCollisionEnter2D (Collision2D other)
+	{
+		collidingWith = other.gameObject.GetComponent (typeof(UsableObject)) as UsableObject;
+		if (null != collidingWith) {
+			Debug.Log ("Colliding with usable object.");
+		}
 	}
 		
 }

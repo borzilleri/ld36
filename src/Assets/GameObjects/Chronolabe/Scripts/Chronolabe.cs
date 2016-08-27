@@ -6,52 +6,32 @@ public class Chronolabe : MonoBehaviour, UsableObject
 {
 	public int Duration;
 
-	int recordingCount = 0;
-
-	bool isRecording = false;
-	bool doSpawn = false;
-
+	private bool isRecording = false;
 	List<PlayerController> ghosts;
 
-	PlayerController user;
-	Vector3 currentSpawn;
-	List<PlayerFrameAction> currentActions;
-	
 	// Use this for initialization
 	void Start ()
 	{
 		ghosts = new List<PlayerController> ();
-		Duration = 60 * 10;
+		Duration = 60 * 5;
 	}
 	
-	void Update ()
-	{
-	}
-
-	void LateUpdate ()
-	{
-		if (isRecording) {
-			if (recordingCount > Duration) {
-				isRecording = false;
-				recordingCount = 0;
-//				ghosts.Add (GhostController.Create (currentActions, currentSpawn));
-				user = null;
-			} else {
-				currentActions.Add (user.lastAction);
-				recordingCount += 1;
-			}
-		}
+	public void AddGhost(PlayerController ghost) {
+		Debug.Log ("Adding Ghost to Chronolabe");	
+		ghosts.Add (ghost);
+		this.isRecording = false;
 	}
 
 	public void Use (GameObject user)
 	{
+		Debug.Log ("Use: chronolabe");
 		if (!isRecording) {
+			Debug.Log ("Activating chronolabe");
 			isRecording = true;
 			foreach (var ghost in ghosts) {
 				ghost.Activate ();
 			}
-			this.user = user.GetComponent<PlayerController>();
-			this.user.StartRecording(Duration);
+			user.GetComponent<PlayerController>().StartRecording(Duration, this);
 		}
 	}
 }
