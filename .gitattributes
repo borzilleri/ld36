@@ -1,8 +1,7 @@
 *       text=auto
 *       eol=lf
-*.md        text
-*.txt       text
-*.cs        text
-*.meta      text
-*.unity     text
-*.sln       text
+*.png				-text
+*.tif				-text
+*.gif				-text
+*.jpg				-text
+
