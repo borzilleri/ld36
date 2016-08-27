@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011150254310}
   - 137: {fileID: 137000014062854224}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: p_sotai
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +35,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010134872928}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: kubi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,7 +50,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000014171905488}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: l_ude2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012993913716}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: atama
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010829941642}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: manto1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010980255882}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: l_ude3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012754921002}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: r_ude2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000013704834982}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: r_ude3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000014158898618}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: r_buki_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011196028932}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: l_ude1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012564097624}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: kokansetsu2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000014233037196}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: r_ude1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000014133167830}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: kokansetsu1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,7 +220,7 @@ GameObject:
   - 61: {fileID: 61000011297380228}
   - 114: {fileID: 114000013062712342}
   - 114: {fileID: 114000012612295790}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player.2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011894185626}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: l_buki_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +250,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000014094502338}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: r_buki_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000013427645648}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_l_buki
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,7 +280,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011668127028}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: r_ashi3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012813069546}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: manto2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,7 +310,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012543139812}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_r_buki
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,7 +325,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010402109560}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_manto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,7 +340,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012098035734}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: r_ashi2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +355,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011063832634}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: sotai
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +370,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011647892842}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_r_kata
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +385,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010314595302}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_kata
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -400,7 +400,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010626471346}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: l_buki_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,7 +415,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012894676518}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: r_ashi1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +430,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000014108801816}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: manto3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -445,7 +445,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011355682398}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: koshi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +460,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011644807878}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_koshi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -475,7 +475,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010491829652}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: l_ashi2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -490,7 +490,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000013239264216}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_l_kata
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -505,7 +505,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012284768944}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_l_kokansetsu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -520,7 +520,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012910893068}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: all_scale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -535,7 +535,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011489365956}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: l_ashi1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,7 +550,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012665744686}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: se
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,7 +565,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011400991268}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_r_kokansetsu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -580,7 +580,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011982758364}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: l_ashi3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
