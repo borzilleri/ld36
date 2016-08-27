@@ -11,7 +11,7 @@ public class Chronolabe : MonoBehaviour, UsableObject
 	bool isRecording = false;
 	bool doSpawn = false;
 
-	List<GhostController> ghosts;
+	List<PlayerController> ghosts;
 
 	PlayerController user;
 	Vector3 currentSpawn;
@@ -24,19 +24,8 @@ public class Chronolabe : MonoBehaviour, UsableObject
 		Duration = 60 * 10;
 	}
 	
-	// Update is called once per frame
 	void Update ()
 	{
-		if (doSpawn) {
-			currentSpawn = user.transform.position;
-			currentActions = new List<PlayerFrameAction> ();
-
-			// Activate Existing Ghosts.
-			foreach (var ghost in ghosts) {
-				ghost.gameObject.SetActive (true);
-			}
-			doSpawn = false;
-		}
 	}
 
 	void LateUpdate ()
@@ -58,9 +47,11 @@ public class Chronolabe : MonoBehaviour, UsableObject
 	{
 		if (!isRecording) {
 			isRecording = true;
-			doSpawn = true;
-
+			foreach (var ghost in ghosts) {
+				ghost.Activate ();
+			}
 			this.user = user.GetComponent<PlayerController>();
+			this.user.StartRecording(Duration);
 		}
 	}
 }
