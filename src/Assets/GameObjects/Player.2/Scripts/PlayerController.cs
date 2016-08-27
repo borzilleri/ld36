@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,6 +23,10 @@ public class PlayerController : MonoBehaviour
 	public Chronolabe chronolabe;
 
 	private UsableObject collidingWith = null;
+
+	private Animator animator;
+	private bool facingRight;
+	private string animationState;
 
 	public PlayerController CreateGhost (PlayerFrameAction[] actions, Vector3 spawn)
 	{
@@ -45,6 +50,8 @@ public class PlayerController : MonoBehaviour
 	{
 		isUsing = false;
 		rb2d = GetComponent<Rigidbody2D> ();
+		animator = GetComponent<Animator> ();
+		facingRight = false;
 	}
 
 	public void StartRecording (int duration, Chronolabe labe)
@@ -56,24 +63,27 @@ public class PlayerController : MonoBehaviour
 		isRecording = true;
 	}
 
-	public void StopRecording() {
+	public void StopRecording ()
+	{
 		Chronolabe labe = this.chronolabe;
 		this.chronolabe = null;
 		labe.AddGhost (CreateGhost (actions, spawnPoint));
 		isRecording = false;
 	}
 
-	public void Activate() {
+	public void Activate ()
+	{
 		Debug.Log ("Activaing ghost.");
 		gameObject.SetActive (true);
 	}
 
-	public void Reset() {
+	public void Reset ()
+	{
 		gameObject.SetActive (false);
 		actionCount = 0;
 		gameObject.transform.position = spawnPoint;
 	}
-	
+
 	void Update ()
 	{
 		if (isGhost) {
@@ -89,17 +99,27 @@ public class PlayerController : MonoBehaviour
 	void FixedUpdate ()
 	{
 		Vector2 movement = Vector2.zero;
-		if (isGhost ) {
-			if( gameObject.activeSelf && actionCount < actions.Length) {
+		if (isGhost) {
+			if (gameObject.activeSelf && actionCount < actions.Length) {
 				movement = actions [actionCount].movement;
 			}
 		} else {
 			float moveHorizontal = Input.GetAxis ("Horizontal");
 			float moveVertical = Input.GetAxis ("Vertical");
+			if (Input.GetKeyDown ("space")) {
+				setAnimation ("Attack");
+			} else if (moveHorizontal == 0 && moveVertical == 0) {
+				setAnimation ("Idle");
+			} else {
+				setAnimation ("Walk");
+				if (moveHorizontal > 0 != facingRight) {
+					flip ();
+				}
+			}
 			movement = new Vector2 (moveHorizontal, moveVertical) * speed;
 			if (isRecording) {
 				lastAction.movement = movement;
-				Debug.LogFormat("Recording Frame: {0}, Vector: {1} ", actionCount, lastAction.movement.ToString ());
+				Debug.LogFormat ("Recording Frame: {0}, Vector: {1} ", actionCount, lastAction.movement.ToString ());
 			}
 		}
 		rb2d.AddForce (movement);
@@ -108,7 +128,7 @@ public class PlayerController : MonoBehaviour
 	void LateUpdate ()
 	{
 		if (!isGhost && isRecording) {
-			Debug.LogFormat("Recording Frame: {0}, Vector: {1} ", actionCount, lastAction.movement.ToString ());
+			Debug.LogFormat ("Recording Frame: {0}, Vector: {1} ", actionCount, lastAction.movement.ToString ());
 			actions [actionCount] = lastAction;
 			lastAction = new PlayerFrameAction ();
 			// Do we need to stop recording?
@@ -118,7 +138,7 @@ public class PlayerController : MonoBehaviour
 		}
 		if (isGhost && gameObject.activeSelf && actionCount >= actions.Length) {
 			// We're done with playback, reset 
-			Reset();
+			Reset ();
 		}
 		actionCount += 1;
 
@@ -128,17 +148,36 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	void OnCollisionExit2D (Collision2D other)
+	void OnTriggerEnter2D (Collider2D other)
+	{
+		collidingWith = other.gameObject.GetComponent (typeof(UsableObject)) as UsableObject;
+		if (null != collidingWith) {
+			Debug.Log ("Colliding with usable object.");
+		}
+	}
+
+	void OnTriggerExit2D (Collider2D other)
 	{
 		Debug.Log ("Uncolliding with object");
 		collidingWith = null;
 	}
 
-	void OnCollisionEnter2D (Collision2D other)
+	private void flip ()
 	{
-		collidingWith = other.gameObject.GetComponent (typeof(UsableObject)) as UsableObject;
-		if (null != collidingWith) {
-			Debug.Log ("Colliding with usable object.");
+		facingRight = !facingRight;
+		Vector3 currentScale = transform.localScale;
+		currentScale.x *= -1;
+		transform.localScale = currentScale;
+	}
+
+	private void setAnimation (string state)
+	{
+		if (animationState != state) {
+			if (!String.IsNullOrEmpty (animationState)) {
+				animator.ResetTrigger (animationState);
+			}
+			animator.SetTrigger (state);
+			animationState = state;
 		}
 	}
 		
