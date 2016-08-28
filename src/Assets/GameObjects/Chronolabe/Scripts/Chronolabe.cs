@@ -2,50 +2,53 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Chronolabe : MonoBehaviour, UsableObject
+public class Chronolabe : MonoBehaviour
 {
-	public int Duration;
+	public static string EVT_CHRONOLABE_RESET = "chronolabeReset";
+	public static string EVT_CHRONOLABE_REC_START = "labeRecordingStart";
+	public static string EVT_CHRONOLABE_REC_STOP = "labeRecordingEnd";
 
-	private bool isRecording = false;
-	List<PlayerController> ghosts;
+	public int GhostFrameDuration;
+	private List<PlayerController> ghosts;
+
+	private bool _recording = false;
+
+	public bool recording {
+		get { return _recording; }
+	}
+
 
 	void Start ()
 	{
 		ghosts = new List<PlayerController> ();
-		Duration = 60 * 5;
+		GhostFrameDuration = 60 * 5;
 	}
-	
-	public void AddGhost(PlayerController ghost) {
+
+	public void AddGhost (PlayerController ghost)
+	{
 		Debug.Log ("Adding Ghost to Chronolabe");	
 		ghosts.Add (ghost);
-		this.isRecording = false;
-		UISystem.Instance.DisplayCutScene ("Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\n\nIn id nisi in mi porttitor sagittis et at massa.", 0.1f, 6f);
+		_recording = false;
+		EventManager.Instance.DispatchEvent (new EventMessage (EVT_CHRONOLABE_REC_STOP));
 	}
 
-	void StartRecording(GameObject user) {
-		Debug.Log ("Activating chronolabe");
-		isRecording = true;
-		foreach (var ghost in ghosts) {
-			ghost.Activate ();
-		}
-		user.GetComponent<PlayerController>().StartRecording(Duration, this);
-	}
-
-	public void Use (GameObject user)
+	public void StartRecording (GameObject user)
 	{
-		UISystem.Instance.NarrateInline ("Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\n\nIn id nisi in mi porttitor sagittis et at massa.", 0.1f, 3f);
-		Debug.Log ("Use: chronolabe");
-		if (!isRecording) {
-			StartRecording (user);
+		if (!_recording) {
+			Debug.Log ("Activating chronolabe");
+			_recording = true;
+			foreach (var ghost in ghosts) {
+				ghost.Activate ();
+			}
+			user.GetComponent<PlayerController> ().StartRecording (GhostFrameDuration, this);
+			EventManager.Instance.DispatchEvent (new EventMessage (EVT_CHRONOLABE_REC_START));
 		}
 	}
 
-	public void Nearby(GameObject user) {
-		UISystem.Instance.NarrateInline ("Aletheia: This looks fun!", 0.1f, 1f);
+	public void Reset() {
+		if (!_recording) {
+			EventManager.Instance.DispatchEvent (new EventMessage (EVT_CHRONOLABE_RESET));
+			ghosts.Clear ();
+		}
 	}
-
-	public string GetTooltip() {
-		return "Use the Chronolabe to record your actions.";
-	}
-
 }

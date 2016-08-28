@@ -21,8 +21,8 @@ GameObject:
   - 4: {fileID: 4000012522189146}
   - 198: {fileID: 198000012217500848}
   - 199: {fileID: 199000010550483098}
-  - 58: {fileID: 58000012026921552}
   - 114: {fileID: 114000012350566788}
+  - 61: {fileID: 61000011111294952}
   m_Layer: 0
   m_Name: UsableObjectTpl
   m_TagString: Untagged
@@ -38,13 +38,13 @@ Transform:
   m_GameObject: {fileID: 1000011571220188}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.73532677, y: 0.73532695, z: 0.73532695}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!58 &58000012026921552
-CircleCollider2D:
+--- !u!61 &61000011111294952
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -56,7 +56,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Size: {x: 1, y: 1}
 --- !u!114 &114000012350566788
 MonoBehaviour:
   m_ObjectHideFlags: 1
