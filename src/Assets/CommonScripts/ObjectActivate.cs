@@ -88,4 +88,4 @@ public class ObjectActivate : MonoBehaviour, UsableObject
                     break;
             }
         }
-    }    public void Use(GameObject user)    {        Debug.Log(string.Format("{0} used {1}", user.name, this.name));        DoActivateTrigger();    }}
+    }    public void Use(GameObject user)    {        Debug.Log(string.Format("{0} used {1}", user.name, this.name));        DoActivateTrigger();    }	public string GetTooltip() {		return "My tooltip";	}}

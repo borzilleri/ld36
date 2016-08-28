@@ -19,6 +19,7 @@ public class UsableObjectCS : MonoBehaviour {
 	public void OnTriggerEnter2D(Collider2D other) {
 		if (null != particles) {
 			particles.Play ();
+			UISystem.Instance.SetTooltip (target.GetTooltip ());
 		}
 	}
 

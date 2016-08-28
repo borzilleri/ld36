@@ -23,16 +23,25 @@ public class Chronolabe : MonoBehaviour, UsableObject
 		this.isRecording = false;
 	}
 
+	void StartRecording(GameObject user) {
+		Debug.Log ("Activating chronolabe");
+		isRecording = true;
+		foreach (var ghost in ghosts) {
+			ghost.Activate ();
+		}
+		user.GetComponent<PlayerController>().StartRecording(Duration, this);
+	}
+
 	public void Use (GameObject user)
 	{
 		Debug.Log ("Use: chronolabe");
 		if (!isRecording) {
-			Debug.Log ("Activating chronolabe");
-			isRecording = true;
-			foreach (var ghost in ghosts) {
-				ghost.Activate ();
-			}
-			user.GetComponent<PlayerController>().StartRecording(Duration, this);
+			StartRecording (user);
 		}
 	}
+
+	public string GetTooltip() {
+		return "Use the chronolabe to do things!";
+	}
+
 }
