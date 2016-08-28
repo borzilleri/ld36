@@ -9,8 +9,6 @@ public class UISystem : MonoBehaviour
 	public float tooltipFadeTime = 2.0f;
 	public int tooltipDuration = 5;
 
-	public float charAnimationDelay = 0.05f;
-
 	public Text inlineNarrativeRegion;
 
 	public Text cutSceneRegion;
@@ -37,56 +35,21 @@ public class UISystem : MonoBehaviour
 		}
 	}
 
-	public void NarrateInline (string text, float waitTime)
+	public void NarrateInline (string text, float charDelay, float waitTime)
 	{
-		StartCoroutine (animateInlineNarration (text, waitTime));
+		StartCoroutine (animateInlineNarration (text, charDelay, waitTime));
 	}
 
-	public IEnumerator animateInlineNarration(string text, float waitTime) {
-		if (!String.Equals (text, inlineNarration)) {
-			if (narratingInline) {
-				StopCoroutine ("animateText");
-				inlineNarrativeRegion.text = "";
-			}
-			narratingInline = true;
-			inlineNarration = text;
-			inlineNarrativeRegion.gameObject.SetActive (true);
-			yield return StartCoroutine (animateText (inlineNarrativeRegion, text, waitTime));
-			narratingInline = false;
-			inlineNarration = "";
-		}
-	}
-
-	public void DisplayCutScene (string text, float waitTime)
+	public void DisplayCutScene (string text, float charDelay, float waitTime)
 	{
 		if (narratingInline) {
 			inlineNarrativeRegion.gameObject.SetActive (false);
 			StopCoroutine ("animateText");
 		}
 		if (!cutSceneDisplaying) {
-			StartCoroutine (animateCutScene (text, waitTime));
+			StartCoroutine (animateCutScene (text, charDelay, waitTime));
 		}
 	}
-
-	public IEnumerator animateCutScene(string text, float waitTime) {
-		cutSceneDisplaying = true;
-		cutSceneBackground.SetActive (true);
-		yield return StartCoroutine (animateText (cutSceneRegion, text, waitTime));
-		cutSceneBackground.SetActive (false);
-		cutSceneDisplaying = false;
-	}
-
-	IEnumerator animateText (Text region, string text, float delay)
-	{
-		region.text = "";
-		foreach (char c in text) {
-			region.text += c;
-			yield return new WaitForSeconds (charAnimationDelay);
-		}
-		yield return new WaitForSeconds (delay);
-		region.text = "";
-	}
-
 
 	public bool CutSceneDisplaying ()
 	{
@@ -98,6 +61,42 @@ public class UISystem : MonoBehaviour
 		if (!String.IsNullOrEmpty (text)) {
 			StartCoroutine (fadeTooltip (text));
 		}
+	}
+
+
+	public IEnumerator animateInlineNarration(string text, float charDelay, float waitTime) {
+		if (!String.Equals (text, inlineNarration)) {
+			if (narratingInline) {
+				StopCoroutine ("animateText");
+				inlineNarrativeRegion.text = "";
+			}
+			narratingInline = true;
+			inlineNarration = text;
+			inlineNarrativeRegion.gameObject.SetActive (true);
+			yield return StartCoroutine (animateText (inlineNarrativeRegion, text, charDelay, waitTime));
+			narratingInline = false;
+			inlineNarration = "";
+		}
+	}
+
+
+	public IEnumerator animateCutScene(string text, float charDelay, float waitTime) {
+		cutSceneDisplaying = true;
+		cutSceneBackground.SetActive (true);
+		yield return StartCoroutine (animateText (cutSceneRegion, text, charDelay, waitTime));
+		cutSceneBackground.SetActive (false);
+		cutSceneDisplaying = false;
+	}
+
+	IEnumerator animateText (Text region, string text, float charDelay, float postDelay)
+	{
+		region.text = "";
+		foreach (char c in text) {
+			region.text += c;
+			yield return new WaitForSeconds (charDelay);
+		}
+		yield return new WaitForSeconds (postDelay);
+		region.text = "";
 	}
 
 	IEnumerator fadeTooltip (string text)
