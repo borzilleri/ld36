@@ -1,4 +1,5 @@
 ﻿using UnityEngine;using System.Collections.Generic;
+using System;
 
 public class ObjectSlot : MonoBehaviour, UsableObject {    public string triggerObjectName;
 
@@ -7,6 +8,10 @@ public class ObjectSlot : MonoBehaviour, UsableObject {    public string trigg
     public string GetTooltip()
     {
         return string.Format("This object is looking for {0}", triggerObjectName);
+    }
+
+    public void Nearby(GameObject user)
+    {
     }
 
     public void Use(GameObject user)    {        if (isHandled == true || user == null || string.IsNullOrEmpty(triggerObjectName))        {            return;        }        Dictionary<string, Pickupable> userInventory = (Dictionary<string, Pickupable>)user.GetComponent<PlayerPickup>().playerInventory;        if (userInventory != null)        {
