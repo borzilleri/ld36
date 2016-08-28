@@ -1,6 +1,5 @@
-﻿using UnityEngine;using System.Collections.Generic;
-using System;
-
+﻿using Assets.CommonScripts.Inventory;
+using UnityEngine;
 public class ObjectSlot : MonoBehaviour, UsableObject {    public string triggerObjectName;
 
     bool isHandled = false;
@@ -14,25 +13,16 @@ public class ObjectSlot : MonoBehaviour, UsableObject {    public string trigg
     {
     }
 
-    public void Use(GameObject user)    {        if (isHandled == true || user == null || string.IsNullOrEmpty(triggerObjectName))        {            return;        }        Dictionary<string, Pickupable> userInventory = (Dictionary<string, Pickupable>)user.GetComponent<PlayerPickup>().playerInventory;        if (userInventory != null)        {
-            Pickupable inventoryItem;
-            if (!userInventory.TryGetValue(triggerObjectName, out inventoryItem))
+    public void Use(GameObject user)    {        if (isHandled == true || user == null || string.IsNullOrEmpty(triggerObjectName))        {            return;        }        PlayerInventory userInventory = (PlayerInventory)user.GetComponent<PlayerPickup>().playerInventory;        if (userInventory != null)        {
+            ObjectPickup inventoryItem = userInventory.Remove(triggerObjectName);
+            if (inventoryItem == null)
             {
                 Debug.Log("Did not find " + triggerObjectName + " in your inventory");
                 return;
             }
 
-            if (inventoryItem.GetType() != typeof(ObjectPickup))
-            {
-                Debug.Log("Did not find a " + triggerObjectName + " of the right base type in your inventory");
-                return;
-            }
-
             Debug.Log("Found " + triggerObjectName + " in your inventory");
-            userInventory.Remove(triggerObjectName);
             isHandled = true;
-
-            Debug.Log("Removed " + triggerObjectName + " from your inventory.");
 
             // Drop the object on the ground
             ((ObjectPickup)inventoryItem).gameObject.SetActive(true);
