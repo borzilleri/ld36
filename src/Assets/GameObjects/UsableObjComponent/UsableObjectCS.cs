@@ -17,6 +17,13 @@ public class UsableObjectCS : MonoBehaviour
 	{
 		target = GetComponentInParent (typeof(UsableObject)) as UsableObject;
 		particles = GetComponent<ParticleSystem> ();
+
+		Bounds spriteBounds = GetComponentInParent<SpriteRenderer> ().bounds;
+		ParticleSystem.ShapeModule shape = particles.shape;
+		shape.radius = spriteBounds.extents.x * 0.8f;
+
+		GetComponent<BoxCollider2D> ().size = spriteBounds.size;
+		GetComponent<BoxCollider2D> ().offset = new Vector2 (spriteBounds.extents.x, 0);
 	}
 
 	public void OnTriggerEnter2D (Collider2D other)
