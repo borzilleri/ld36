@@ -22,6 +22,7 @@ GameObject:
   - 198: {fileID: 198000012217500848}
   - 199: {fileID: 199000010550483098}
   - 58: {fileID: 58000012026921552}
+  - 114: {fileID: 114000012350566788}
   m_Layer: 0
   m_Name: UsableObjectTpl
   m_TagString: Untagged
@@ -56,6 +57,17 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2
+--- !u!114 &114000012350566788
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011571220188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63791772ea7284da5a38eb4470868f84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198000012217500848
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -63,7 +75,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011571220188}
   serializedVersion: 2
-  lengthInSec: 5
+  lengthInSec: 10
   startDelay:
     scalar: 0
     maxCurve:
@@ -103,7 +115,7 @@ ParticleSystem:
   randomSeed: 63433504
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   moveWithTransform: 1
   scalingMode: 1
   InitialModule:
