@@ -86,65 +86,72 @@ public class PlayerController : MonoBehaviour
 
 	void Update ()
 	{
-		if (isGhost) {
-			if (gameObject.activeSelf && actionCount < actions.Length) {
-				isUsing = actions [actionCount].isUsing;
+		if (!UISystem.Instance.CutSceneDisplaying ()) {
+			if (isGhost) {
+				if (gameObject.activeSelf && actionCount < actions.Length) {
+					isUsing = actions [actionCount].isUsing;
+				}
+			} else {
+				isUsing = Input.GetButton ("Action");
+				lastAction.isUsing = isUsing;
 			}
-		} else {
-			isUsing = Input.GetButton ("Action");
-			lastAction.isUsing = isUsing;
 		}
 	}
 
 	void FixedUpdate ()
 	{
-		Vector2 movement = Vector2.zero;
-		if (isGhost) {
-			if (gameObject.activeSelf && actionCount < actions.Length) {
-				movement = actions [actionCount].movement;
-			}
-		} else {
-			float moveHorizontal = Input.GetAxis ("Horizontal");
-			float moveVertical = Input.GetAxis ("Vertical");
-			if (Input.GetKeyDown ("space")) {
-				setAnimation ("Attack");
-			} else if (moveHorizontal == 0 && moveVertical == 0) {
-				setAnimation ("Idle");
+		if (!UISystem.Instance.CutSceneDisplaying ()) {
+			
+			Vector2 movement = Vector2.zero;
+			if (isGhost) {
+				if (gameObject.activeSelf && actionCount < actions.Length) {
+					movement = actions [actionCount].movement;
+				}
 			} else {
-				setAnimation ("Walk");
-				if (moveHorizontal > 0 != facingRight) {
-					flip ();
+				float moveHorizontal = Input.GetAxis ("Horizontal");
+				float moveVertical = Input.GetAxis ("Vertical");
+				if (Input.GetKeyDown ("space")) {
+					setAnimation ("Attack");
+				} else if (moveHorizontal == 0 && moveVertical == 0) {
+					setAnimation ("Idle");
+				} else {
+					setAnimation ("Walk");
+					if (moveHorizontal > 0 != facingRight) {
+						flip ();
+					}
+				}
+				movement = new Vector2 (moveHorizontal, moveVertical) * speed;
+				if (isRecording) {
+					lastAction.movement = movement;
+					Debug.LogFormat ("Recording Frame: {0}, Vector: {1} ", actionCount, lastAction.movement.ToString ());
 				}
 			}
-			movement = new Vector2 (moveHorizontal, moveVertical) * speed;
-			if (isRecording) {
-				lastAction.movement = movement;
-				Debug.LogFormat ("Recording Frame: {0}, Vector: {1} ", actionCount, lastAction.movement.ToString ());
-			}
+			rb2d.AddForce (movement);
 		}
-		rb2d.AddForce (movement);
 	}
 
 	void LateUpdate ()
 	{
-		if (!isGhost && isRecording) {
-			Debug.LogFormat ("Recording Frame: {0}, Vector: {1} ", actionCount, lastAction.movement.ToString ());
-			actions [actionCount] = lastAction;
-			lastAction = new PlayerFrameAction ();
-			// Do we need to stop recording?
-			if (actionCount == actions.Length - 1) {
-				StopRecording ();
+		if (!UISystem.Instance.CutSceneDisplaying ()) {
+			if (!isGhost && isRecording) {
+				Debug.LogFormat ("Recording Frame: {0}, Vector: {1} ", actionCount, lastAction.movement.ToString ());
+				actions [actionCount] = lastAction;
+				lastAction = new PlayerFrameAction ();
+				// Do we need to stop recording?
+				if (actionCount == actions.Length - 1) {
+					StopRecording ();
+				}
 			}
-		}
-		if (isGhost && gameObject.activeSelf && actionCount >= actions.Length) {
-			// We're done with playback, reset 
-			Reset ();
-		}
-		actionCount += 1;
+			if (isGhost && gameObject.activeSelf && actionCount >= actions.Length) {
+				// We're done with playback, reset 
+				Reset ();
+			}
+			actionCount += 1;
 
-		if (isUsing && null != collidingWith) {
-			Debug.Log ("Using object");
-			collidingWith.Use (gameObject);
+			if (isUsing && null != collidingWith) {
+				Debug.Log ("Using object");
+				collidingWith.Use (gameObject);
+			}
 		}
 	}
 
