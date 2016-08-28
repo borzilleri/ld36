@@ -16,8 +16,8 @@ TagManager:
   - Background
   - Game
   - UI
-  - 
-  - 
+  - Platforms
+  - Player
   - 
   - 
   - 
@@ -46,6 +46,9 @@ TagManager:
     locked: 0
   - name: Game
     uniqueID: 3074020095
+    locked: 0
+  - name: Player
+    uniqueID: 3656646829
     locked: 0
   - name: Foreground
     uniqueID: 3103108925
