@@ -7,6 +7,7 @@ namespace Assets.CommonScripts.Inventory
     public class PlayerInventory
     {
         private Dictionary<string, ObjectPickup> items;
+        private InventoryUIController inventoryDisplay;
 
         public PlayerInventory()
         {

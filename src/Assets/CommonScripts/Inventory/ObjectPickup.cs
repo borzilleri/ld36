@@ -17,5 +17,13 @@ public class ObjectPickup : MonoBehaviour, Pickupable {
 
         Debug.Log("Hiding " + gameObject);
         this.gameObject.SetActive(false);
+
+        InventoryUIController uiInventory = (InventoryUIController)Transform.FindObjectOfType<InventoryUIController>();
+        if (uiInventory == null)
+        {
+            Debug.Log("Couldn't find InventoryUIController");
+            return;
+        }
+        uiInventory.AddToInventoryPanel(this);
     }
 }
