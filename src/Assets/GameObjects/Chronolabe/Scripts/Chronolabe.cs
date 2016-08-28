@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 public class Chronolabe : MonoBehaviour
 {
-	public static string EVT_CHRONOLABE_RESET = "chronolabeReset";
-	public static string EVT_CHRONOLABE_REC_START = "labeRecordingStart";
-	public static string EVT_CHRONOLABE_REC_STOP = "labeRecordingEnd";
+	public const string EVT_CHRONOLABE_RESET = "chronolabeReset";
+	public const string EVT_CHRONOLABE_REC_START = "labeRecordingStart";
+	public const string EVT_CHRONOLABE_REC_STOP = "labeRecordingEnd";
 
 	public int GhostFrameDuration;
 	private List<PlayerController> ghosts;

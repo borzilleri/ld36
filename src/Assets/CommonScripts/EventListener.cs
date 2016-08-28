@@ -2,5 +2,5 @@
 
 public interface EventListener
 {
-	void ReceieveEvent(EventMessage evt);
+	void ReceiveEvent(EventMessage evt);
 }
