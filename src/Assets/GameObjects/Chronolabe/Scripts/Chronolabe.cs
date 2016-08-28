@@ -9,6 +9,7 @@ public class Chronolabe : MonoBehaviour, UsableObject
 	private bool isRecording = false;
 	List<PlayerController> ghosts;
 
+
 	// Use this for initialization
 	void Start ()
 	{

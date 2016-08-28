@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
 	public Chronolabe chronolabe;
 
-	private UsableObject collidingWith = null;
+	private UsableObjectCS collidingWith = null;
 
 	private Animator animator;
 	private bool facingRight;
@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-		collidingWith = other.gameObject.GetComponent (typeof(UsableObject)) as UsableObject;
+		collidingWith = other.gameObject.GetComponent<UsableObjectCS>();
 		if (null != collidingWith) {
 			Debug.Log ("Colliding with usable object.");
 		}
@@ -158,7 +158,6 @@ public class PlayerController : MonoBehaviour
 
 	void OnTriggerExit2D (Collider2D other)
 	{
-		Debug.Log ("Uncolliding with object");
 		collidingWith = null;
 	}
 
