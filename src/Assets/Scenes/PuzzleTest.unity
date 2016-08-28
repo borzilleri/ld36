@@ -150,7 +150,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 262126979}
   m_Layer: 0
-  m_Name: ItemPickup
+  m_Name: Inventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -815,10 +815,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipRegion: {fileID: 1297734380}
-  ttFadeTime: 2
-  ttDuration: 5
+  tooltipFadeTime: 2
+  tooltipDuration: 5
+  charAnimationDelay: 0.05
   inlineNarrativeRegion: {fileID: 0}
   cutSceneRegion: {fileID: 0}
+  cutSceneBackground: {fileID: 0}
 --- !u!114 &1076522484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1032,7 +1034,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1344595604}
   m_Layer: 0
-  m_Name: InterItem
+  m_Name: Interactions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1359,6 +1361,10 @@ Prefab:
       propertyPath: m_Name
       value: ItemDropOff
       objectReference: {fileID: 0}
+    - target: {fileID: 21200000, guid: 18fcd494ab71841d695135246693eb3a, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents:
     - {fileID: 5000000, guid: 18fcd494ab71841d695135246693eb3a, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 18fcd494ab71841d695135246693eb3a, type: 2}
