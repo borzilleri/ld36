@@ -1,0 +1,1 @@
+﻿using UnityEngine;public interface Pickupable {    void Pickup(GameObject player);}

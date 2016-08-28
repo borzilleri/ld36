@@ -6,52 +6,46 @@ public class Chronolabe : MonoBehaviour, UsableObject
 {
 	public int Duration;
 
-	int recordingCount = 0;
-
-	bool isRecording = false;
-	bool doSpawn = false;
-
+	private bool isRecording = false;
 	List<PlayerController> ghosts;
 
-	PlayerController user;
-	Vector3 currentSpawn;
-	List<PlayerFrameAction> currentActions;
-	
-	// Use this for initialization
 	void Start ()
 	{
 		ghosts = new List<PlayerController> ();
-		Duration = 60 * 10;
+		Duration = 60 * 5;
 	}
 	
-	void Update ()
-	{
+	public void AddGhost(PlayerController ghost) {
+		Debug.Log ("Adding Ghost to Chronolabe");	
+		ghosts.Add (ghost);
+		this.isRecording = false;
+		UISystem.Instance.DisplayCutScene ("Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\n\nIn id nisi in mi porttitor sagittis et at massa.", 6f);
 	}
 
-	void LateUpdate ()
-	{
-		if (isRecording) {
-			if (recordingCount > Duration) {
-				isRecording = false;
-				recordingCount = 0;
-//				ghosts.Add (GhostController.Create (currentActions, currentSpawn));
-				user = null;
-			} else {
-				currentActions.Add (user.lastAction);
-				recordingCount += 1;
-			}
+	void StartRecording(GameObject user) {
+		Debug.Log ("Activating chronolabe");
+		isRecording = true;
+		foreach (var ghost in ghosts) {
+			ghost.Activate ();
 		}
+		user.GetComponent<PlayerController>().StartRecording(Duration, this);
 	}
 
 	public void Use (GameObject user)
 	{
+		UISystem.Instance.NarrateInline ("Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\n\nIn id nisi in mi porttitor sagittis et at massa.", 3f);
+		Debug.Log ("Use: chronolabe");
 		if (!isRecording) {
-			isRecording = true;
-			foreach (var ghost in ghosts) {
-				ghost.Activate ();
-			}
-			this.user = user.GetComponent<PlayerController>();
-			this.user.StartRecording(Duration);
+			StartRecording (user);
 		}
 	}
+
+	public void Nearby(GameObject user) {
+		UISystem.Instance.NarrateInline ("Aletheia: This looks fun!", 0.5f);
+	}
+
+	public string GetTooltip() {
+		return "Use the Chronolabe to record your actions.";
+	}
+
 }
