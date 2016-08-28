@@ -19,7 +19,7 @@ public class Chronolabe : MonoBehaviour, UsableObject
 		Debug.Log ("Adding Ghost to Chronolabe");	
 		ghosts.Add (ghost);
 		this.isRecording = false;
-		UISystem.Instance.DisplayCutScene ("Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\n\nIn id nisi in mi porttitor sagittis et at massa.", 6f);
+		UISystem.Instance.DisplayCutScene ("Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\n\nIn id nisi in mi porttitor sagittis et at massa.", 0.1f, 6f);
 	}
 
 	void StartRecording(GameObject user) {
@@ -33,7 +33,7 @@ public class Chronolabe : MonoBehaviour, UsableObject
 
 	public void Use (GameObject user)
 	{
-		UISystem.Instance.NarrateInline ("Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\n\nIn id nisi in mi porttitor sagittis et at massa.", 3f);
+		UISystem.Instance.NarrateInline ("Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\n\nIn id nisi in mi porttitor sagittis et at massa.", 0.1f, 3f);
 		Debug.Log ("Use: chronolabe");
 		if (!isRecording) {
 			StartRecording (user);
@@ -41,7 +41,7 @@ public class Chronolabe : MonoBehaviour, UsableObject
 	}
 
 	public void Nearby(GameObject user) {
-		UISystem.Instance.NarrateInline ("Aletheia: This looks fun!", 0.5f);
+		UISystem.Instance.NarrateInline ("Aletheia: This looks fun!", 0.1f, 1f);
 	}
 
 	public string GetTooltip() {
