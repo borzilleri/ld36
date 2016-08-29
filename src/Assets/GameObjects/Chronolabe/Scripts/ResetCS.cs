@@ -6,9 +6,20 @@ public class ResetCS : MonoBehaviour, UsableObject, EventListener
 	Chronolabe labe;
 
 	public Transform hourglass;
+
+	private AudioSource audio;
+
 	private float hourglassRotation = 180;
 	private float hourglassRotationTarget = 180;
 	private float speed = 100;
+
+
+	void Start ()
+	{
+		audio = GetComponent<AudioSource> ();
+		labe = GetComponentInParent<Chronolabe> ();
+		EventManager.Instance.AddListener (Chronolabe.EVT_CHRONOLABE_RESET, gameObject);
+	}
 
 	void Update()
 	{
@@ -20,16 +31,14 @@ public class ResetCS : MonoBehaviour, UsableObject, EventListener
 		}
 	}
 
-	void Start ()
-	{
-		labe = GetComponentInParent<Chronolabe> ();
-		EventManager.Instance.AddListener (Chronolabe.EVT_CHRONOLABE_RESET, gameObject);
-	}
-
 	public void UseStart (GameObject user)
 	{
 		if (null != labe) {
 			labe.Reset ();
+			if (audio.isPlaying) {
+				audio.Stop ();
+			}
+			audio.Play ();
 		}
 		if (hourglassRotation > 180) {
 			hourglassRotation = 0;
