@@ -1,16 +1,15 @@
 ﻿using Assets.CommonScripts.Inventory;
 using UnityEngine;
 
+// Add this controller to an object to have it remove an item from the player's inventory and add it back into 
+// the game world.  Inventory items must have the ObjectPickup controller.  
+//
+// The specific item that this will remove from the player's inventory is psecified by the triggerObjectName public field.
 public class ObjectSlot : MonoBehaviour, UsableObject {
 
     public string triggerObjectName;
 
     bool isHandled = false;
-
-    public string GetTooltip()
-    {
-        return string.Format("This object is looking for {0}", triggerObjectName);
-    }
 
     public void Nearby(GameObject user)
     {
@@ -21,6 +20,7 @@ public class ObjectSlot : MonoBehaviour, UsableObject {
 
     public void UseStart(GameObject user)
     {
+        Debug.Log("Entered UseStart of ObjectSlot");
         if (isHandled == true || user == null || string.IsNullOrEmpty(triggerObjectName))
         {
             return;
@@ -40,11 +40,14 @@ public class ObjectSlot : MonoBehaviour, UsableObject {
             isHandled = true;
 
             // Drop the object on the target
-            InventoryUIController uiInventory = (InventoryUIController)Transform.FindObjectOfType<InventoryUIController>();
-            if (uiInventory != null)
+            if (!user.GetComponent<PlayerController>().isGhost)
             {
-                Debug.Log("Found InventoryUIController");
-                uiInventory.RemoveFromInventoryPanel(inventoryItem, transform);
+                InventoryUIController uiInventory = (InventoryUIController)Transform.FindObjectOfType<InventoryUIController>();
+                if (uiInventory != null)
+                {
+                    Debug.Log("Found InventoryUIController");
+                    uiInventory.RemoveFromInventoryPanel(inventoryItem, transform);
+                }
             }
 
             inventoryItem.gameObject.SetActive(true);

@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace Assets.CommonScripts.Inventory
 {
+    // 
+    //  TODO - Stacks of multiple identical items
     public class PlayerInventory
     {
         private Dictionary<string, ObjectPickup> items;

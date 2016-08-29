@@ -10,9 +10,8 @@ public class InventoryUIController : MonoBehaviour {
 
     private static bool isInitialized = false;
 
-	// Use this for initialization
 	void Start () {
-        if (isInitialized)
+        if (isInitialized) // Make sure there is only ever one of these
         {
             return;
         }
@@ -22,11 +21,6 @@ public class InventoryUIController : MonoBehaviour {
         activeInventoryPanel = Instantiate(inventoryPanelPrefab);
         activeInventoryPanel.transform.SetParent(gameObject.transform, false);
         activeInventoryPanel.SetActive(false);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 
     public void AddToInventoryPanel(ObjectPickup inventoryItem)
