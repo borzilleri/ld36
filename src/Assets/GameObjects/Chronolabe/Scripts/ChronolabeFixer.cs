@@ -9,10 +9,6 @@ public class ChronolabeFixer : MonoBehaviour, UsableObject
 	public Inventory objectInventory;
 	public string triggerObjectName;
 
-	string fixedCutSceneText = @"
-You fixed the chronolabe.
-";
-
 	void Start ()
 	{
 		objectInventory = new Inventory ();
@@ -43,7 +39,7 @@ You fixed the chronolabe.
 			// inventoryItem.gameObject.SetActive(true);
 			// inventoryItem.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1f);
 			Debug.Log ("--- objectInventory ---");
-			UISystem.Instance.NarrateInline ("Aletheia: I hope this works...", 0f, 0.5f);
+			UISystem.Instance.NarrateInline ("Aletheia: I hope this works.", 0f, 0.5f);
 			objectInventory.Add (inventoryItem);
 			objectInventory.LogInventory ();
 		}
@@ -52,8 +48,6 @@ You fixed the chronolabe.
 	public void UseEnd (GameObject user)
 	{
 		if (objectInventory.HasItem (triggerObjectName)) {
-			UISystem.Instance.DisplayCutScene (fixedCutSceneText, 0.05f, 2f);
-
 			chronolabe.transform.position = transform.position;
 			Vector3 pos = transform.position;
 			pos.z = -9999;
@@ -73,11 +67,16 @@ You fixed the chronolabe.
 	}
 
 
+	bool _brokeNarration = false;
 	string brokenNarration = @"Aletheia: A chronolabe! It looks like the core has been damaged. 
-	I'll need to find a new one in order to get it working.";
+
+I'll need to find a new one in order to get it working.";
 
 	public void Nearby (GameObject user)
 	{
-		UISystem.Instance.NarrateInline (brokenNarration, 0f, 1f);
+		if (!_brokeNarration) {
+			UISystem.Instance.NarrateInline (brokenNarration, 0f, 1f);
+			_brokeNarration = true;
+		}
 	}
 }

@@ -19,8 +19,9 @@ Aletheia recalls hearing that it would be possible to travel back in time with a
 
 	public void Nearby (GameObject user)
 	{
-		if (_narrationTriggered) {
+		if (!_narrationTriggered) {
 			UISystem.Instance.DisplayCutScene (narration, 0.1f, 3f);
+			_narrationTriggered = true;
 		}
 	}
 }
