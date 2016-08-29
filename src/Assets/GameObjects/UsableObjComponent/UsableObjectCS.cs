@@ -8,9 +8,11 @@ using System.Collections;
  * 2. Add the UsableObjectTpl Prefab as a child of your game object.
  * 3. Adjust Position of Transform, Radius/Offset of Circile Collider, and Radius of Emission Shape as needed.
  */
+[RequireComponent(typeof(BoxCollider2D))]
 public class UsableObjectCS : MonoBehaviour
 {
 	public GameObject target;
+	public float usableRadiusPercent = 1.25f;
 	private ParticleSystem particles;
 
 	void Start ()
@@ -21,8 +23,9 @@ public class UsableObjectCS : MonoBehaviour
 		ParticleSystem.ShapeModule shape = particles.shape;
 		shape.radius = spriteBounds.extents.x * 0.8f;
 
-		GetComponent<BoxCollider2D> ().size = spriteBounds.size;
-		GetComponent<BoxCollider2D> ().offset = new Vector2 (spriteBounds.extents.x, 0);
+		Vector2 colliderSize = spriteBounds.size;
+		colliderSize.x *= usableRadiusPercent;
+		GetComponent<BoxCollider2D> ().size = colliderSize;
 	}
 
 	public void OnTriggerEnter2D (Collider2D other)
@@ -32,7 +35,7 @@ public class UsableObjectCS : MonoBehaviour
 		}
 		if (!UISystem.Instance.CutSceneDisplaying ()) {
 			if (null != other.GetComponents<PlayerController> ()) {
-				target.SendMessage ("Nearby", other);
+				target.SendMessage ("Nearby", other.gameObject);
 			}
 		}
 	}
@@ -44,10 +47,13 @@ public class UsableObjectCS : MonoBehaviour
 		}
 	}
 
-	public void Use (GameObject user)
+	public void StopUsing(GameObject user) {
+		target.SendMessage ("UseEnd", user);
+	}
+	public void StartUsing (GameObject user)
 	{
 		if (!UISystem.Instance.CutSceneDisplaying ()) {
-			target.SendMessage ("Use", user);
+			target.SendMessage ("UseStart", user);
 		}
 	}
 }
