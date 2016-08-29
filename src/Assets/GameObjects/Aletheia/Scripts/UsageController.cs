@@ -42,12 +42,13 @@ public class UsageController : MonoBehaviour
 		}
 	}
 
+	public void ForceTriggerExit() {
+		OnTriggerExit2D (null);
+	}
+
 	void OnTriggerEnter2D (Collider2D other)
 	{
 		collidingWith = other.gameObject.GetComponent<UsableObjectCS> ();
-		if (null != collidingWith) {
-			Debug.Log ("Colliding with usable object.");
-		}
 	}
 
 	void OnTriggerExit2D (Collider2D other)

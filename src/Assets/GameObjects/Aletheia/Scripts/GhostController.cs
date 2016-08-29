@@ -16,13 +16,13 @@ public class GhostController : MonoBehaviour
 
 	private Chronolabe chronolabe;
 
-	public GhostController CreateGhost (PlayerFrameAction[] actions, Vector3 spawn) {
+	public GhostController CreateGhost () {
 		GameObject newObj = Instantiate (gameObject) as GameObject;
 		newObj.SetActive (false);
 		GhostController ghost = newObj.GetComponent<GhostController> ();
 		ghost._isGhost = true;
-		ghost.actions = actions;
-		ghost.spawnPoint = spawn;
+		ghost.actions = actions.Clone () as PlayerFrameAction[];
+		ghost.spawnPoint = spawnPoint;
 		return ghost;
 	}
 
@@ -32,7 +32,7 @@ public class GhostController : MonoBehaviour
 		isRecording = false;
 		Chronolabe labe = chronolabe;
 		chronolabe = null;
-		labe.AddGhost (CreateGhost (actions, spawnPoint));
+		labe.AddGhost (CreateGhost ());
 	}
 
 	public void StartRecording (int frames, Chronolabe labe)
@@ -48,9 +48,10 @@ public class GhostController : MonoBehaviour
 	public void StartPlayback ()
 	{
 		if (_isGhost) {
-			Debug.LogFormat ("Beginning Playback of {0} frames", actionCount);
+			Debug.LogFormat ("Beginning Playback of at {0} with {1} frames", spawnPoint.ToString(), actions.Length);
 			actionCount = 0;
 			gameObject.SetActive (true);
+			gameObject.transform.position = spawnPoint;
 		}
 	}
 
@@ -58,8 +59,8 @@ public class GhostController : MonoBehaviour
 	{
 		if (_isGhost) {
 			Debug.Log ("Stopping playback");
+			GetComponent<UsageController> ().ForceTriggerExit ();
 			gameObject.SetActive (false);
-			gameObject.transform.position = spawnPoint;
 		}
 	}
 
@@ -71,7 +72,6 @@ public class GhostController : MonoBehaviour
 	{
 		if (!UISystem.Instance.CutSceneDisplaying ()) {
 			if (isRecording) {
-				Debug.LogFormat ("Recording frame: {0}", actionCount);
 				PlayerFrameAction action = new PlayerFrameAction ();
 				action.SetKeyStateFromInput (KeyCode.Space);
 				action.SetKeyStateFromInput (KeyCode.UpArrow);
@@ -97,17 +97,26 @@ public class GhostController : MonoBehaviour
 
 	public bool GetKey (KeyCode key)
 	{
-		return isPlayback ? actions [actionCount].GetKey (key) : Input.GetKey (key);
+		if (isGhost) {
+			return isPlayback ? actions [actionCount].GetKey (key) : false;
+		}
+		return Input.GetKey (key);
 	}
 
 	public bool GetKeyDown (KeyCode key)
 	{
-		return isPlayback ? actions [actionCount].GetKeyDown (key) : Input.GetKeyDown (key);
+		if (isGhost) {
+			return isPlayback ? actions [actionCount].GetKeyDown (key) : false;
+		}
+		return Input.GetKey (key);
 	}
 
 	public bool GetKeyUp (KeyCode key)
 	{
-		return isPlayback ? actions [actionCount].GetKeyUp (key) : Input.GetKeyUp (key);
+		if (isGhost) {
+			return isPlayback ? actions [actionCount].GetKeyUp (key) : false;
+		}
+		return Input.GetKeyUp (key);
 	}
 }
 
