@@ -11,11 +11,13 @@ public class ResetCS : MonoBehaviour, UsableObject, EventListener
 		EventManager.Instance.AddListener (Chronolabe.EVT_CHRONOLABE_RESET, gameObject);
 	}
 
-	public void Use (GameObject user)
+	public void UseStart (GameObject user)
 	{
 		labe.Reset ();
 	}
 
+	public void UseEnd(GameObject user) {
+	}
 	public void Nearby (GameObject user)
 	{
 	}

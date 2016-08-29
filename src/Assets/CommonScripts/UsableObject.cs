@@ -3,7 +3,9 @@ using UnityEngine;
 
 public interface UsableObject
 {
-	void Use (GameObject user);
+	void UseStart (GameObject user);
 
-	void Nearby(GameObject user);
+	void UseEnd (GameObject user);
+
+	void Nearby (GameObject user);
 }
