@@ -28,7 +28,9 @@ public class ResetCS : MonoBehaviour, UsableObject, EventListener
 
 	public void UseStart (GameObject user)
 	{
-		labe.Reset ();
+		if (null != labe) {
+			labe.Reset ();
+		}
 		if (hourglassRotation > 180) {
 			hourglassRotation = 0;
 			hourglassRotationTarget = 180;
@@ -46,7 +48,8 @@ public class ResetCS : MonoBehaviour, UsableObject, EventListener
 
 	public string GetTooltip ()
 	{
-		return labe.recording ? "" : "Use: Erase your recorded actions.";
+		
+		return null != labe && labe.recording ? "" : "Use: Erase your recorded actions.";
 	}
 
 	private bool _resetting = false;

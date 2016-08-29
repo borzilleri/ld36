@@ -260,6 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc2953b8d107f454ba7c35f79c8aa6bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hourglass: {fileID: 0}
 --- !u!198 &198000013302381994
 ParticleSystem:
   m_ObjectHideFlags: 1
