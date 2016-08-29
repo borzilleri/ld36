@@ -32,12 +32,18 @@ public class Chronolabe : MonoBehaviour
 		}
 	}
 
+	public void WarpComplete() {
+		Reset ();
+	}
+
 	public void AddGhost (GhostController ghost)
 	{
-		Debug.Log ("Adding Ghost to Chronolabe");	
-		ghosts.Add (ghost);
-		_recording = false;
+		if (_recording) {
+			Debug.Log ("Adding Ghost to Chronolabe");
+			ghosts.Add (ghost);
+		}
 		EventManager.Instance.DispatchEvent (new EventMessage (EVT_CHRONOLABE_REC_STOP));
+		_recording = false;
 	}
 
 	public void StartRecording (GameObject user)
@@ -55,9 +61,10 @@ public class Chronolabe : MonoBehaviour
 	}
 
 	public void Reset() {
-		if (!_recording) {
-			EventManager.Instance.DispatchEvent (new EventMessage (EVT_CHRONOLABE_RESET));
-			ghosts.Clear ();
+		_recording = false;
+		foreach (GhostController ghost in ghosts) {
+			Destroy (ghost.gameObject);
 		}
+		ghosts.Clear ();
 	}
 }

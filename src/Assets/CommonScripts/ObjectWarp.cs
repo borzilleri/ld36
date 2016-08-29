@@ -11,6 +11,7 @@ public class ObjectWarp : MonoBehaviour {
 
     bool hasTriggered = false;
     float totalRotation = 0;
+	bool notifiedWarpee = false;
 
 	void Start()
 	{
@@ -26,8 +27,16 @@ public class ObjectWarp : MonoBehaviour {
                 warpee.transform.Rotate(0, rotationSpeed, 0);
                 totalRotation += rotationSpeed;
             }
+			
         }
     }
+
+	void LateUpdate() {
+		if( totalRotation > 90 && !notifiedWarpee ) {
+			// Notify Warpee here.
+			warpee.SendMessage("WarpComplete", SendMessageOptions.DontRequireReceiver);
+		}
+	}
 
     public void OnTriggerEnter2D (Collider2D user)
     {
