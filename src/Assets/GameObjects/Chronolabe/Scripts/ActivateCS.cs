@@ -15,11 +15,18 @@ public class ActivateCS : MonoBehaviour, UsableObject, EventListener
 		EventManager.Instance.AddListener (Chronolabe.EVT_CHRONOLABE_REC_STOP, gameObject);
 	}
 
+
+	string narration = @"Yes! I can use this to get past the door! I just need to press the button and then come back and activate the chronolabe again.";
+	bool _narration = false;
 	public void UseStart (GameObject user)
 	{
 		labe.StartRecording (user);
 		if (!audio.isPlaying) {
 			audio.Play ();
+		}
+		if (!_narration) {
+			UISystem.Instance.NarrateInline (narration, 0f, 1f);
+			_narration = true;
 		}
 	}
 
