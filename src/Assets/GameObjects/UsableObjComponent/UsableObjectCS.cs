@@ -10,12 +10,11 @@ using System.Collections;
  */
 public class UsableObjectCS : MonoBehaviour
 {
+	public GameObject target;
 	private ParticleSystem particles;
-	private UsableObject target;
 
 	void Start ()
 	{
-		target = GetComponentInParent (typeof(UsableObject)) as UsableObject;
 		particles = GetComponent<ParticleSystem> ();
 
 		Bounds spriteBounds = GetComponentInParent<SpriteRenderer> ().bounds;
@@ -33,10 +32,9 @@ public class UsableObjectCS : MonoBehaviour
 		}
 		if (!UISystem.Instance.CutSceneDisplaying ()) {
 			if (null != other.GetComponents<PlayerController> ()) {
-				target.Nearby (other.gameObject);
+				target.SendMessage ("Nearby", other);
 			}
 		}
-		UISystem.Instance.SetTooltip (target.GetTooltip ());
 	}
 
 	public void OnTriggerExit2D (Collider2D other)
@@ -49,7 +47,7 @@ public class UsableObjectCS : MonoBehaviour
 	public void Use (GameObject user)
 	{
 		if (!UISystem.Instance.CutSceneDisplaying ()) {
-			target.Use (user);
+			target.SendMessage ("Use", user);
 		}
 	}
 }
