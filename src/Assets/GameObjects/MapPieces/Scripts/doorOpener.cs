@@ -70,7 +70,13 @@ public class doorOpener : MonoBehaviour, UsableObject {
 		setDoorClosed (true);
 	}
 
+
+	bool _triggeredNarration = false;
+	string narration = @"Aletheia: I can't get past this door, not without help...";
 	public void Nearby(GameObject user) {
+		if (!_triggeredNarration) {
+			UISystem.Instance.NarrateInline (narration, 0.05f, 1f);
+		}
 //		Debug.Log ("NEARBY IS BEING CALLED!!");
 	}
 

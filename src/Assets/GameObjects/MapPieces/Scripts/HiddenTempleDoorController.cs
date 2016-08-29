@@ -42,7 +42,14 @@ public class HiddenTempleDoorController : MonoBehaviour, UsableObject {
 		setDoorOpen (!bc2d.enabled);
 	}
 
+	string narration = @"Aletheia: There's no way I'm opening this thing by hand. These are supposed to be opened by some kind of mechanism though.
+	
+I always saw the scholars pressing this button to open the door, may as well try it...";
+	
 	public void Nearby (GameObject user) {
+		if (!bc2d.enabled) {
+			UISystem.Instance.NarrateInline (narration, 0.05f, 1f);
+		}
 	}
 }
 
