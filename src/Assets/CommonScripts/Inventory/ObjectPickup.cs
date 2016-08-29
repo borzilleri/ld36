@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ObjectPickup : MonoBehaviour, Pickupable, UsableObject
 {
+
+	public GameObject sprite;
+
     // Add this controller to any game object that the player can pick up and hold in their inventory.  The object  
     // must have UsableObjectTpl template with the object as the target of UsableObjectCS.  To enable the player to pick up the item, add the
     // PlayerInventory controller (Assets/CommonScripts/Inventory/PlayerInventory.cs) to the player's controllers.

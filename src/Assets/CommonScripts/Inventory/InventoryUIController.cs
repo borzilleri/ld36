@@ -27,12 +27,14 @@ public class InventoryUIController : MonoBehaviour {
 
     public void AddToInventoryPanel(ObjectPickup inventoryItem)
     {
+		Debug.Log("--- AddToInventoryPanel (item) ---");
+
         if (!activeInventoryPanel.activeInHierarchy)
         {
             activeInventoryPanel.SetActive(true);
         }
 
-        SpriteRenderer itemSpriteRenderer = inventoryItem.GetComponent<SpriteRenderer>();
+		SpriteRenderer itemSpriteRenderer = inventoryItem.sprite.GetComponent<SpriteRenderer>();
 
         Image inventoryItemImage = Instantiate(imagePrefab);
         inventoryItemImage.sprite = itemSpriteRenderer.sprite;
@@ -50,14 +52,14 @@ public class InventoryUIController : MonoBehaviour {
         AddToInventoryPanel(inventoryItem);
 
         // DEBUG
-        Debug.Log("--- AddToInventoryPanel ---");
+		Debug.Log("--- AddToInventoryPanel (item, user) ---");
         Inventory inventory = (Inventory)user.GetComponent<PlayerInventory>().playerInventory;
         inventory.LogInventory();
     }
 
     public void RemoveFromInventoryPanel(ObjectPickup inventoryItem)
     {
-        SpriteRenderer itemSpriteRenderer = inventoryItem.GetComponent<SpriteRenderer>();
+        SpriteRenderer itemSpriteRenderer = inventoryItem.sprite.GetComponent<SpriteRenderer>();
         Image[] imagesInInventory = activeInventoryPanel.GetComponentsInChildren<Image>();
         foreach(var image in imagesInInventory)
         {
