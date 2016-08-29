@@ -101,9 +101,4 @@ public class ObjectActivate : MonoBehaviour, UsableObject
     public void Nearby(GameObject user)
     {
     }
-
-    public string GetTooltip()
-    {
-        return "My tooltip";
-    }
 }

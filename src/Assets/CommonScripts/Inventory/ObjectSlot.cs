@@ -7,9 +7,10 @@ using UnityEngine;
 // The specific item that this will remove from the player's inventory is psecified by the triggerObjectName public field.
 public class ObjectSlot : MonoBehaviour, UsableObject {
 
+    public Inventory objectInventory;
     public string triggerObjectName;
 
-    bool isHandled = false;
+    void Start()    {        objectInventory = new Inventory();    }
 
     public void Nearby(GameObject user)
     {
@@ -20,13 +21,12 @@ public class ObjectSlot : MonoBehaviour, UsableObject {
 
     public void UseStart(GameObject user)
     {
-        Debug.Log("Entered UseStart of ObjectSlot");
-        if (isHandled == true || user == null || string.IsNullOrEmpty(triggerObjectName))
+        if (user == null || string.IsNullOrEmpty(triggerObjectName))
         {
             return;
         }
 
-        PlayerInventory userInventory = (PlayerInventory)user.GetComponent<PlayerPickup>().playerInventory;
+        Inventory userInventory = (Inventory)user.GetComponent<PlayerInventory>().playerInventory;
         if (userInventory != null)
         {
             ObjectPickup inventoryItem = userInventory.Remove(triggerObjectName);
@@ -36,22 +36,21 @@ public class ObjectSlot : MonoBehaviour, UsableObject {
                 return;
             }
 
-            Debug.Log("Found " + triggerObjectName + " in your inventory");
-            isHandled = true;
-
-            // Drop the object on the target
-            if (!user.GetComponent<PlayerController>().isGhost)
+            if (!user.GetComponent<GhostController>().isGhost)
             {
                 InventoryUIController uiInventory = (InventoryUIController)Transform.FindObjectOfType<InventoryUIController>();
                 if (uiInventory != null)
                 {
                     Debug.Log("Found InventoryUIController");
-                    uiInventory.RemoveFromInventoryPanel(inventoryItem, transform);
+                    uiInventory.RemoveFromInventoryPanel(inventoryItem);
                 }
             }
 
-            inventoryItem.gameObject.SetActive(true);
-            inventoryItem.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1f);
+            // inventoryItem.gameObject.SetActive(true);
+            // inventoryItem.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1f);
+            Debug.Log("--- objectInventory ---");
+            objectInventory.Add(inventoryItem);
+            objectInventory.LogInventory();
         }
     }
 }

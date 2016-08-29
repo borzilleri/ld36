@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using Assets.CommonScripts.Inventory;
+using UnityEngine;
 using UnityEngine.UI;
 
+// Add to the Canvas and assign the InventoryPanel and Image prefabs
 public class InventoryUIController : MonoBehaviour {
 
     public GameObject inventoryPanelPrefab;
@@ -38,28 +40,47 @@ public class InventoryUIController : MonoBehaviour {
         inventoryItemImage.color = itemSpriteRenderer.color;
         inventoryItemImage.name = itemSpriteRenderer.name;
 
+        Debug.Log("AddToInventoryPanel : Added " + inventoryItemImage.name + " to UI inventory");
+
         inventoryItemImage.transform.SetParent(activeInventoryPanel.transform, false);
     }
 
-    public void RemoveFromInventoryPanel(ObjectPickup inventoryItem, Transform slot)
+    public void AddToInventoryPanel(ObjectPickup inventoryItem, GameObject user)
     {
-        SpriteRenderer itemSprite = inventoryItem.GetComponent<SpriteRenderer>();
-        SpriteRenderer[] spritesInInventory = activeInventoryPanel.GetComponentsInChildren<SpriteRenderer>();
-        foreach(var item in spritesInInventory)
-        {
-            Debug.Log("Found " + item.name + " in inventory");
+        AddToInventoryPanel(inventoryItem);
 
-            if (itemSprite.name == item.name)
+        // DEBUG
+        Debug.Log("--- AddToInventoryPanel ---");
+        Inventory inventory = (Inventory)user.GetComponent<PlayerInventory>().playerInventory;
+        inventory.LogInventory();
+    }
+
+    public void RemoveFromInventoryPanel(ObjectPickup inventoryItem)
+    {
+        SpriteRenderer itemSpriteRenderer = inventoryItem.GetComponent<SpriteRenderer>();
+        Image[] imagesInInventory = activeInventoryPanel.GetComponentsInChildren<Image>();
+        foreach(var image in imagesInInventory)
+        {
+            if (itemSpriteRenderer.name == image.name)
             {
-                Debug.Log("Match detected with " + itemSprite);
+                Debug.Log("Match detected with " + itemSpriteRenderer);
+                DestroyObject(image);
             }
         }
 
-        //ObjectPickup[] itemsInInventory = activeInventoryPanel.GetComponentsInChildren<ObjectPickup>(true);
-
-        if (spritesInInventory.Length == 0)
+        if (imagesInInventory.Length == 0)
         {
             activeInventoryPanel.SetActive(false);
         }
+    }
+
+    public void RemoveFromInventoryPanel(ObjectPickup inventoryItem, GameObject user)
+    {
+        RemoveFromInventoryPanel(inventoryItem);
+
+        // DEBUG
+        Debug.Log("--- RemoveFromInventoryPanel ---");
+        Inventory inventory = (Inventory)user.GetComponent<PlayerInventory>().playerInventory;
+        inventory.LogInventory();
     }
 }
