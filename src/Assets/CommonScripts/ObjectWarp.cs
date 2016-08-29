@@ -11,7 +11,8 @@ public class ObjectWarp : MonoBehaviour {
     float totalRotation = 0;
 
     void Update()
-    {        if (hasTriggered)
+    {
+        if (hasTriggered)
         {
             if (totalRotation <= 90)
             {
@@ -23,6 +24,7 @@ public class ObjectWarp : MonoBehaviour {
 
     public void OnTriggerEnter2D (Collider2D user)
     {
+		Debug.Log ("TRIGGERING!!");
         if (hasTriggered == true)
         {
             return;
