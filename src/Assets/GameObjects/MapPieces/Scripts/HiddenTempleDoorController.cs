@@ -29,8 +29,6 @@ public class HiddenTempleDoorController : MonoBehaviour, UsableObject {
 		if (audio.isPlaying) {
 			audio.Stop ();
 		}
-		//sound clip is too long (ain't nobody got time to edit audio files)
-		audio.time = 0.6f;
 		audio.Play ();
 	}
 

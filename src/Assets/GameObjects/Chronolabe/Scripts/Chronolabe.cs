@@ -9,6 +9,8 @@ public class Chronolabe : MonoBehaviour
 	public const string EVT_CHRONOLABE_REC_STOP = "labeRecordingEnd";
 
 	public int ghostDurationSeconds = 3;
+
+	private AudioSource audio;
 	private List<GhostController> ghosts;
 
 	private bool _recording = false;
@@ -19,7 +21,15 @@ public class Chronolabe : MonoBehaviour
 
 	void Start ()
 	{
+		audio = GetComponent<AudioSource> ();
 		ghosts = new List<GhostController> ();
+	}
+
+	void LateUpdate()
+	{
+		if (!recording && audio.isPlaying) {
+			audio.Stop ();
+		}
 	}
 
 	public void AddGhost (GhostController ghost)
@@ -40,6 +50,7 @@ public class Chronolabe : MonoBehaviour
 			}
 			user.GetComponent<GhostController> ().StartRecording (ghostDurationSeconds * 60, this);
 			EventManager.Instance.DispatchEvent (new EventMessage (EVT_CHRONOLABE_REC_START));
+			audio.Play ();
 		}
 	}
 
