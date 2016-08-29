@@ -43,6 +43,7 @@ You fixed the chronolabe.
 			// inventoryItem.gameObject.SetActive(true);
 			// inventoryItem.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1f);
 			Debug.Log ("--- objectInventory ---");
+			UISystem.Instance.NarrateInline ("Aletheia: I hope this works...", 0f, 0.5f);
 			objectInventory.Add (inventoryItem);
 			objectInventory.LogInventory ();
 		}
@@ -71,8 +72,12 @@ You fixed the chronolabe.
 //		Destroy (gameObject);		
 	}
 
+
+	string brokenNarration = @"Aletheia: A chronolabe! It looks like the core has been damaged. 
+	I'll need to find a new one in order to get it working.";
+
 	public void Nearby (GameObject user)
 	{
-		UISystem.Instance.NarrateInline ("Aletheia: A piece is missing, it won't work until I fix it.", 0f, 1f);
+		UISystem.Instance.NarrateInline (brokenNarration, 0f, 1f);
 	}
 }
