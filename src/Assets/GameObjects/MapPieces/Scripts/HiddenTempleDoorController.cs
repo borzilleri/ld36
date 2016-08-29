@@ -3,7 +3,7 @@ using System.Collections;
 
 public class HiddenTempleDoorController : MonoBehaviour {
 
-	private bool isOpen = false;
+//	private bool isOpen = false;
 	private Animator animator;
 	private BoxCollider2D bc2d;
 

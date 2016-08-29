@@ -5,6 +5,21 @@ public class ResetCS : MonoBehaviour, UsableObject, EventListener
 {
 	Chronolabe labe;
 
+	public Transform hourglass;
+	private float hourglassRotation = 180;
+	private float hourglassRotationTarget = 180;
+	private float speed = 100;
+
+	void Update()
+	{
+		if (null != hourglass && hourglassRotation <= hourglassRotationTarget) {
+			Vector3 previousRotation = hourglass.eulerAngles;
+			hourglassRotation += speed * Time.deltaTime;
+			previousRotation.z = hourglassRotation;
+			hourglass.eulerAngles = previousRotation;
+		}
+	}
+
 	void Start ()
 	{
 		labe = GetComponentInParent<Chronolabe> ();
@@ -14,6 +29,13 @@ public class ResetCS : MonoBehaviour, UsableObject, EventListener
 	public void UseStart (GameObject user)
 	{
 		labe.Reset ();
+		if (hourglassRotation > 180) {
+			hourglassRotation = 0;
+			hourglassRotationTarget = 180;
+		} else {
+			hourglassRotation = 180;
+			hourglassRotationTarget = 360;			
+		}
 	}
 
 	public void UseEnd(GameObject user) {
@@ -50,4 +72,5 @@ public class ResetCS : MonoBehaviour, UsableObject, EventListener
 		}
 
 	}
+		
 }
