@@ -10,7 +10,10 @@ public class ObjectSlot : MonoBehaviour, UsableObject {
     public Inventory objectInventory;
     public string triggerObjectName;
 
-    void Start()    {        objectInventory = new Inventory();    }
+    void Start()
+    {
+        objectInventory = new Inventory();
+    }
 
     public void Nearby(GameObject user)
     {

@@ -109,8 +109,11 @@ public class CharacterControllerSideScroll : MonoBehaviour
 
 		// if holding down bump up our movement amount and turn off one way platform detection for a frame.
 		// this lets us jump down through one way platforms
-		if (_controller.isGrounded && _input.GetKey (KeyCode.DownArrow)) {
-			_velocity.y *= 3f;
+		if(_input.GetKey( KeyCode.DownArrow ))
+		{
+			if (_controller.isGrounded) {
+				_velocity.y *= 3f;
+			}
 			_controller.ignoreOneWayPlatformsThisFrame = true;
 		}
 

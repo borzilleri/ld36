@@ -248,6 +248,8 @@ GameObject:
   - 61: {fileID: 61000013798749896}
   - 114: {fileID: 114000011485736906}
   - 114: {fileID: 114000010763746462}
+  - 114: {fileID: 114000012735958530}
+  - 114: {fileID: 114000010323013552}
   m_Layer: 12
   m_Name: Aletheia
   m_TagString: Untagged
@@ -277,7 +279,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.32229, w: 0.946641}
   m_LocalPosition: {x: 0.022480011, y: -1.1058004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 20.142466}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 4.6823883}
   m_Children:
   - {fileID: 4000010650093374}
   m_Father: {fileID: 4000013031850204}
@@ -291,7 +293,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0.27248415, w: 0.9621603}
   m_LocalPosition: {x: 0.5956795, y: 1.1000001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 11.378626}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 6.637248}
   m_Children:
   - {fileID: 4000014261704156}
   m_Father: {fileID: 4000013531487840}
@@ -302,8 +304,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013854872982}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 130.2, y: 2.5, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -6.9011364, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -332,7 +334,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0.16644207, w: 0.98605126}
   m_LocalPosition: {x: 0.022853151, y: -1.1516681, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 322.56894}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 281.486}
   m_Children: []
   m_Father: {fileID: 4000012697414692}
   m_RootOrder: 0
@@ -345,7 +347,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0.19433789, w: 0.9809347}
   m_LocalPosition: {x: 0.037146848, y: -4.010332, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 34.045578}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 27.533548}
   m_Children:
   - {fileID: 4000012333275922}
   m_Father: {fileID: 4000013715438188}
@@ -359,7 +361,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0.3137522, w: 0.9495049}
   m_LocalPosition: {x: -0.0051543713, y: -1.0999999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 331.18756}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 360.49472}
   m_Children: []
   m_Father: {fileID: 4000013625367344}
   m_RootOrder: 0
@@ -372,7 +374,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.0996272, w: 0.9950249}
   m_LocalPosition: {x: -0.80432045, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -13.068397}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -10.89154}
   m_Children:
   - {fileID: 4000011430529872}
   m_Father: {fileID: 4000013531487840}
@@ -386,7 +388,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0.07760618, w: 0.9969841}
   m_LocalPosition: {x: -0.15432045, y: 1.6200001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 361.46603}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 358.63306}
   m_Children: []
   m_Father: {fileID: 4000013531487840}
   m_RootOrder: 0
@@ -399,7 +401,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0.07444655, w: 0.99722505}
   m_LocalPosition: {x: 0.02, y: 0.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -10.90496}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -4.893622}
   m_Children:
   - {fileID: 4000013330878590}
   - {fileID: 4000013031850204}
@@ -415,7 +417,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.31536567, w: 0.9489702}
   m_LocalPosition: {x: 0.81, y: -4.032, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 338.2838}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 360.93213}
   m_Children:
   - {fileID: 4000012992294516}
   m_Father: {fileID: 4000013715438188}
@@ -445,7 +447,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.044961285, w: 0.99898875}
   m_LocalPosition: {x: 0.30955628, y: -2.2768185, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1.6762028}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 3.2179413}
   m_Children:
   - {fileID: 4000013531487840}
   m_Father: {fileID: 4000013715438188}
@@ -459,7 +461,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.17423162, w: 0.98470473}
   m_LocalPosition: {x: 0.0025185347, y: -1.2163033, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 11.48217}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 18.165392}
   m_Children:
   - {fileID: 4000012237473312}
   m_Father: {fileID: 4000011625525214}
@@ -494,7 +496,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: -1.68}
   serializedVersion: 2
-  m_Size: {x: 1.96, y: 9.98}
+  m_Size: {x: 3.54, y: 9.98}
 --- !u!95 &95000011819473124
 Animator:
   serializedVersion: 3
@@ -512,6 +514,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114000010323013552
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013854872982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c32126cd023e4502aec0f84b122c4aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000010763746462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -530,10 +543,10 @@ MonoBehaviour:
     m_Bits: 2048
   triggerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   oneWayPlatformMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8192
   slopeLimit: 30
   jumpingThreshold: 0.07
   slopeSpeedMultiplier:
@@ -574,11 +587,22 @@ MonoBehaviour:
   runSpeed: 12
   groundDamping: 20
   inAirDamping: 5
-  jumpHeight: 2
+  jumpHeight: 5
   _animator: {fileID: 95000011819473124}
   IdleState: Altheia_Idle
   RunState: Altheia_Walk
   JumpState: Altheia_Walk
+--- !u!114 &114000012735958530
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013854872982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ebd414fbfbf44914804e4a29eeaa5fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212000010038236388
 SpriteRenderer:
   m_ObjectHideFlags: 1
