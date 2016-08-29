@@ -40,7 +40,7 @@ public class ObjectSlot : MonoBehaviour, UsableObject {
             isHandled = true;
 
             // Drop the object on the target
-            if (!user.GetComponent<PlayerController>().isGhost)
+            if (!user.GetComponent<GhostController>().isGhost)
             {
                 InventoryUIController uiInventory = (InventoryUIController)Transform.FindObjectOfType<InventoryUIController>();
                 if (uiInventory != null)

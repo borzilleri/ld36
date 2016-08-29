@@ -249,6 +249,7 @@ GameObject:
   - 114: {fileID: 114000011485736906}
   - 114: {fileID: 114000010763746462}
   - 114: {fileID: 114000012735958530}
+  - 114: {fileID: 114000010323013552}
   m_Layer: 12
   m_Name: Aletheia
   m_TagString: Untagged
@@ -513,7 +514,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114000010390897426
+--- !u!114 &114000010323013552
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

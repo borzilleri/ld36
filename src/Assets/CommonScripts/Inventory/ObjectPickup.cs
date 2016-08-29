@@ -22,7 +22,7 @@ public class ObjectPickup : MonoBehaviour, Pickupable {
         Debug.Log("Hiding " + gameObject);
         this.gameObject.SetActive(false);
 
-        if (!user.GetComponent<PlayerController>().isGhost)
+        if (!user.GetComponent<GhostController>().isGhost)
         {
             InventoryUIController uiInventory = (InventoryUIController)Transform.FindObjectOfType<InventoryUIController>();
             if (uiInventory == null)
