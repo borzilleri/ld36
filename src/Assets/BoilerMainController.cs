@@ -15,7 +15,7 @@ public class BoilerMainController : MonoBehaviour {
 
 	private bool lastDoorState = false;
 
-	void Update () 
+	void LateUpdate () 
 	{
 		fireRender.enabled = fire;
 		waterRender.enabled = water;
@@ -27,34 +27,5 @@ public class BoilerMainController : MonoBehaviour {
 			lastDoorState = doorState;
 		}
 	}
+
 }
-
-
-
-/*
- * 
- * 
-
-		openPosition = new Vector3 (transform.position.x, transform.position.y + openOffset, 0);
-		closePosition = transform.position;	
-		spriteRenderer = GetComponent<SpriteRenderer> ();
-
-	public int openOffset;
-	private Vector3 openPosition;
-	private Vector3 closePosition;
-
-	//Pulled code from the door controller to get a water falling effect
-//totally not perfect but nothing is
-private bool isClosed = false;
-private float fraction = 0;
-private int speed = 5;
-private SpriteRenderer spriteRenderer;
-
-
-		if (isClosed && fraction < 1) {
-			fraction += Time.deltaTime * speed;
-		} else if(!isClosed && fraction > 0) {
-			fraction -= Time.deltaTime * speed;
-		}
-		transform.position = Vector3.Lerp (openPosition, closePosition, fraction);
-*/
