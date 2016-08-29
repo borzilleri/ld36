@@ -8,8 +8,8 @@ public class Chronolabe : MonoBehaviour
 	public const string EVT_CHRONOLABE_REC_START = "labeRecordingStart";
 	public const string EVT_CHRONOLABE_REC_STOP = "labeRecordingEnd";
 
-	public int GhostFrameDuration;
-	private List<PlayerController> ghosts;
+	public int ghostDurationSeconds = 3;
+	private List<GhostController> ghosts;
 
 	private bool _recording = false;
 
@@ -17,14 +17,12 @@ public class Chronolabe : MonoBehaviour
 		get { return _recording; }
 	}
 
-
 	void Start ()
 	{
-		ghosts = new List<PlayerController> ();
-		GhostFrameDuration = 60 * 5;
+		ghosts = new List<GhostController> ();
 	}
 
-	public void AddGhost (PlayerController ghost)
+	public void AddGhost (GhostController ghost)
 	{
 		Debug.Log ("Adding Ghost to Chronolabe");	
 		ghosts.Add (ghost);
@@ -38,9 +36,9 @@ public class Chronolabe : MonoBehaviour
 			Debug.Log ("Activating chronolabe");
 			_recording = true;
 			foreach (var ghost in ghosts) {
-				ghost.Activate ();
+				ghost.StartPlayback ();
 			}
-			user.GetComponent<PlayerController> ().StartRecording (GhostFrameDuration, this);
+			user.GetComponent<GhostController> ().StartRecording (ghostDurationSeconds * 60, this);
 			EventManager.Instance.DispatchEvent (new EventMessage (EVT_CHRONOLABE_REC_START));
 		}
 	}
