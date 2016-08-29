@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-// Add to the Canvas and assign the InventoryPanel and Image prefabs
+// Add to the Canvas and assign Panel and Image prefabs
 public class InventoryUIController : MonoBehaviour {
 
     public GameObject inventoryPanelPrefab;
