@@ -1,10 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/**
+ * Controls opening / closing of door
+ * Transform should be set in the closed position
+ * The openOffset should be the amount the door needs to move on the Y axis to be open
+ * if "open" is set to true the door will start in the open state when the scene loads
+ */
 public class doorOpener : MonoBehaviour, UsableObject {
 
 	public int openOffset;
 	public float speed = 0.5f;
+	public bool open = false;
 
 	private Vector3 openPosition;
 	private Vector3 closePosition;
@@ -17,6 +24,11 @@ public class doorOpener : MonoBehaviour, UsableObject {
 	void Start () {
 		openPosition = new Vector3 (transform.position.x, transform.position.y + openOffset, 0);
 		closePosition = transform.position;
+		if (open) {
+			transform.position = openPosition;
+			isClosed = false;
+			fraction = 0;
+		}
 	}
 	
 	// Update is called once per frame

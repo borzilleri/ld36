@@ -401,6 +401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openOffset: 4
   speed: 1.5
+  open: 0
 --- !u!1001 &357639552
 Prefab:
   m_ObjectHideFlags: 0
