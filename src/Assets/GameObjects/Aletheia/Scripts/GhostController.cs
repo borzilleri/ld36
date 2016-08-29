@@ -11,18 +11,24 @@ public class GhostController : MonoBehaviour
 	}
 
 	int actionCount;
-	PlayerFrameAction[] actions;
+	PlayerFrameAction[] frameActions;
 	Vector3 spawnPoint;
+
+	PlayerMovement[] transforms;
+	PlayerAction[] actions;
 
 	private Chronolabe chronolabe;
 
-	public GhostController CreateGhost () {
+	public GhostController CreateGhost ()
+	{
 		GameObject newObj = Instantiate (gameObject) as GameObject;
 		newObj.SetActive (false);
 		GhostController ghost = newObj.GetComponent<GhostController> ();
 		ghost._isGhost = true;
-		ghost.actions = actions.Clone () as PlayerFrameAction[];
 		ghost.spawnPoint = spawnPoint;
+		ghost.frameActions = frameActions.Clone () as PlayerFrameAction[];
+		ghost.transforms = transforms.Clone () as PlayerMovement[];
+		ghost.actions = actions.Clone () as PlayerAction[];
 		return ghost;
 	}
 
@@ -41,14 +47,16 @@ public class GhostController : MonoBehaviour
 		chronolabe = labe;
 		isRecording = true;
 		actionCount = 0;
-		actions = new PlayerFrameAction[frames];
+		frameActions = new PlayerFrameAction[frames];
+		transforms = new PlayerMovement[frames];
+		actions = new PlayerAction[frames];
 		spawnPoint = gameObject.transform.position;
 	}
 
 	public void StartPlayback ()
 	{
 		if (_isGhost) {
-			Debug.LogFormat ("Beginning Playback of at {0} with {1} frames", spawnPoint.ToString(), actions.Length);
+			Debug.LogFormat ("Beginning Playback of at {0} with {1} frames", spawnPoint.ToString (), frameActions.Length);
 			actionCount = 0;
 			gameObject.SetActive (true);
 			gameObject.transform.position = spawnPoint;
@@ -68,6 +76,36 @@ public class GhostController : MonoBehaviour
 		get { return _isGhost && gameObject.activeSelf; }
 	}
 
+	public void RecordMovement (PlayerMovement action)
+	{
+		if (isRecording) {
+			transforms [actionCount] = action;
+		}
+	}
+
+	public void RecordAction (PlayerAction action)
+	{
+		if (isRecording) {
+			actions [actionCount] = action;
+		}
+	}
+
+	public PlayerMovement GetRecordedMovement ()
+	{
+		if (actionCount < transforms.Length) {
+			return transforms [actionCount];
+		}
+		return PlayerMovement.zero;
+	}
+
+	public PlayerAction GetRecordedAction ()
+	{
+		if (actionCount < actions.Length) {
+			return actions [actionCount];
+		}
+		return PlayerAction.None;
+	}
+
 	void LateUpdate ()
 	{
 		if (!UISystem.Instance.CutSceneDisplaying ()) {
@@ -79,14 +117,14 @@ public class GhostController : MonoBehaviour
 				action.SetKeyStateFromInput (KeyCode.LeftArrow);
 				action.SetKeyStateFromInput (KeyCode.RightArrow);
 
-				actions [actionCount] = action;
+				frameActions [actionCount] = action;
 			}
 
 			if (isPlayback || isRecording) {
 				actionCount += 1;
 			}
 
-			if (actions != null && actionCount >= actions.Length) {
+			if (frameActions != null && actionCount >= frameActions.Length) {
 				if (isRecording)
 					StopRecording ();
 				if (isPlayback)
@@ -97,24 +135,30 @@ public class GhostController : MonoBehaviour
 
 	public bool GetKey (KeyCode key)
 	{
+		if (UISystem.Instance.CutSceneDisplaying ())
+			return false;
 		if (isGhost) {
-			return isPlayback ? actions [actionCount].GetKey (key) : false;
+			return isPlayback ? frameActions [actionCount].GetKey (key) : false;
 		}
 		return Input.GetKey (key);
 	}
 
 	public bool GetKeyDown (KeyCode key)
 	{
+		if (UISystem.Instance.CutSceneDisplaying ())
+			return false;
 		if (isGhost) {
-			return isPlayback ? actions [actionCount].GetKeyDown (key) : false;
+			return isPlayback ? frameActions [actionCount].GetKeyDown (key) : false;
 		}
 		return Input.GetKey (key);
 	}
 
 	public bool GetKeyUp (KeyCode key)
 	{
+		if (UISystem.Instance.CutSceneDisplaying ())
+			return false;
 		if (isGhost) {
-			return isPlayback ? actions [actionCount].GetKeyUp (key) : false;
+			return isPlayback ? frameActions [actionCount].GetKeyUp (key) : false;
 		}
 		return Input.GetKeyUp (key);
 	}

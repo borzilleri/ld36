@@ -9,6 +9,10 @@ public class ChronolabeFixer : MonoBehaviour, UsableObject
 	public Inventory objectInventory;
 	public string triggerObjectName;
 
+	string fixedCutSceneText = @"
+You fixed the chronolabe.
+";
+
 	void Start ()
 	{
 		objectInventory = new Inventory ();
@@ -47,7 +51,7 @@ public class ChronolabeFixer : MonoBehaviour, UsableObject
 	public void UseEnd (GameObject user)
 	{
 		if (objectInventory.HasItem (triggerObjectName)) {
-			//TODO: if they have the sun in their inventory do this... else tell them no
+			UISystem.Instance.DisplayCutScene (fixedCutSceneText, 0.05f, 2f);
 
 			chronolabe.transform.position = transform.position;
 			Vector3 pos = transform.position;

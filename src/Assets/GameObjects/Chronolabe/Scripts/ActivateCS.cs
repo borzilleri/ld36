@@ -4,10 +4,12 @@ using System.Collections;
 public class ActivateCS : MonoBehaviour, UsableObject, EventListener
 {
 	Chronolabe labe;
+	private AudioSource audio;
 
 	// Use this for initialization
 	void Start ()
 	{
+		audio = GetComponent<AudioSource> ();
 		labe = GetComponentInParent<Chronolabe> ();
 		EventManager.Instance.AddListener (Chronolabe.EVT_CHRONOLABE_REC_START, gameObject);
 		EventManager.Instance.AddListener (Chronolabe.EVT_CHRONOLABE_REC_STOP, gameObject);
@@ -15,12 +17,21 @@ public class ActivateCS : MonoBehaviour, UsableObject, EventListener
 
 	public void UseStart (GameObject user)
 	{
-		Debug.Log ("Chronolabe: Activated");
 		labe.StartRecording (user);
+		if (!audio.isPlaying) {
+			audio.Play ();
+		}
 	}
 
-	public void UseEnd(GameObject user) {
-		
+	public void UseEnd (GameObject user)
+	{
+	}
+
+	void LateUpdate ()
+	{
+		if (!labe.recording && audio.isPlaying) {
+			audio.Stop ();
+		}
 	}
 
 	public void Nearby (GameObject user)
