@@ -86,7 +86,7 @@ public class GhostController : MonoBehaviour
 				actionCount += 1;
 			}
 
-			if (actionCount >= actions.Length) {
+			if (actions != null && actionCount >= actions.Length) {
 				if (isRecording)
 					StopRecording ();
 				if (isPlayback)
