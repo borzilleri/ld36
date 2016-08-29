@@ -13,15 +13,18 @@ public class doorOpener : MonoBehaviour, UsableObject {
 	public float speed = 0.5f;
 	public bool open = false;
 
+	private AudioSource audio;
 	private Vector3 openPosition;
 	private Vector3 closePosition;
 
 	//start the door closed
+	private bool previousIsClosed = true;
 	private bool isClosed = true;
 	private float fraction = 1;
 
 	// Use this for initialization
 	void Start () {
+		audio = GetComponent<AudioSource> ();
 		openPosition = new Vector3 (transform.position.x, transform.position.y + openOffset, 0);
 		closePosition = transform.position;
 		if (open) {
@@ -39,10 +42,24 @@ public class doorOpener : MonoBehaviour, UsableObject {
 			fraction -= Time.deltaTime * speed;
 		}
 		transform.position = Vector3.Lerp (openPosition, closePosition, fraction);
+
+		if (previousIsClosed != isClosed) {
+			//play sound
+			if (audio.isPlaying) {
+				audio.Stop ();
+			}
+			//sound clip is too long (ain't nobody got time to edit audio files)
+			audio.time = 0.5f;
+			audio.Play ();		
+
+		}
+		previousIsClosed = isClosed;
 	}
 
 	void setDoorClosed(bool state) {
 		isClosed = state;
+
+
 	}
 
 	public void UseStart( GameObject user) {
