@@ -32,7 +32,7 @@ public class UsableObjectCS : MonoBehaviour
 		}
 		if (!UISystem.Instance.CutSceneDisplaying ()) {
 			if (null != other.GetComponents<PlayerController> ()) {
-				target.SendMessage ("Nearby", other);
+				target.SendMessage ("Nearby", other.gameObject);
 			}
 		}
 	}
