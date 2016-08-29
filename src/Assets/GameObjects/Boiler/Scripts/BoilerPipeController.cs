@@ -1,15 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BoilerPipeController : MonoBehaviour, UsableObject {
+public class BoilerPipeController : MonoBehaviour {
 
-	public void UseStart(GameObject user) {
-		GetComponent<Animator> ().SetBool ("Fixed", true);
+	public BoilerMainController boiler;
+
+	private Animator animator;
+
+	void Start()
+	{
+		animator = GetComponent<Animator> ();
 	}
-	public void UseEnd(GameObject user) {
-		GetComponent<Animator> ().SetBool ("Fixed", false);
+
+	public void OnTriggerEnter2D (Collider2D user)
+	{
+		animator.SetBool ("Fixed", true);
+		boiler.pipe = true;
 	}
-	public void Nearby(GameObject user) {
+
+	public void OnTriggerExit2D (Collider2D user)
+	{
+		animator.SetBool ("Fixed", false);
+		boiler.pipe = false;
 	}
 
 }

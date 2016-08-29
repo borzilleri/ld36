@@ -13,7 +13,6 @@ public class HiddenTempleDoorController : MonoBehaviour, UsableObject {
 		animator = GetComponent<Animator> ();
 		bc2d = GetComponent<BoxCollider2D> ();
 		audio = GetComponent<AudioSource> ();
-//		setDoorOpen (true);
 	}
 	
 	// Update is called once per frame
@@ -21,7 +20,7 @@ public class HiddenTempleDoorController : MonoBehaviour, UsableObject {
 	
 	}
 
-	void setDoorOpen(bool open) {
+	public void setDoorOpen(bool open) {
 		animator.Play (open ? "HiddenTempleDoorOpen" : "HiddenTempleDoorClose");
 		bc2d.enabled = open;
 
