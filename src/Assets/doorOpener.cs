@@ -45,9 +45,6 @@ public class doorOpener : MonoBehaviour, UsableObject {
 		isClosed = state;
 	}
 
-	public void Use( GameObject user) {
-	}
-
 	public void UseStart( GameObject user) {
 		Debug.Log ("USE START IS BEING CALLED!!");
 		setDoorClosed (false);

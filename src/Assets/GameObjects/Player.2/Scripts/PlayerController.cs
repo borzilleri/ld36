@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
 
 			if (isUsing && null != collidingWith) {
 				Debug.Log ("Using object");
-				collidingWith.Use (gameObject);
+//				collidingWith.Use (gameObject);
 			}
 		}
 	}
