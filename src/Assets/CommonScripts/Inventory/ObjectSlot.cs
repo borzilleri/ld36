@@ -1,8 +1,8 @@
 ﻿using Assets.CommonScripts.Inventory;
 using UnityEngine;
 
-// Add this controller to an object to have it remove an item from the player's inventory and add it back into 
-// the game world.  Inventory items must have the ObjectPickup controller.  
+// Add this controller to an object to have it remove an item from the player's inventory and add it to 
+// the object's inventory.  Inventory items must have the ObjectPickup controller.  
 //
 // The specific item that this will remove from the player's inventory is psecified by the triggerObjectName public field.
 public class ObjectSlot : MonoBehaviour, UsableObject {

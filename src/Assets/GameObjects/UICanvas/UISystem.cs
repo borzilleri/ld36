@@ -26,7 +26,7 @@ public class UISystem : MonoBehaviour
 	void Awake ()
 	{
 		if (!_created) {
-			DontDestroyOnLoad (this);
+			//DontDestroyOnLoad (this);
 			Instance = this;
 			_created = true;
 		} else {

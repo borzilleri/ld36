@@ -13,7 +13,7 @@ namespace Assets.CommonScripts.Inventory
 
         public Inventory()
         {
-            items = new Dictionary<string, ObjectPickup>();
+            items = new Dictionary<string, ObjectPickup>(StringComparer.OrdinalIgnoreCase);
         }
 
         public Inventory(ObjectPickup inventoryItem) : this()
@@ -48,7 +48,7 @@ namespace Assets.CommonScripts.Inventory
                 return null;
             }
 
-            if (items.Keys.Contains<string>(itemName, StringComparer.OrdinalIgnoreCase))
+            if (items.Keys.Contains<string>(itemName))
             {
                 ObjectPickup removedItem;
                 if(items.TryGetValue(itemName, out removedItem))
