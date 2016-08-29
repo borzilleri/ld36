@@ -13,14 +13,19 @@ public class ActivateCS : MonoBehaviour, UsableObject, EventListener
 		EventManager.Instance.AddListener (Chronolabe.EVT_CHRONOLABE_REC_STOP, gameObject);
 	}
 
-	public void Use (GameObject user)
+	public void UseStart (GameObject user)
 	{
 		Debug.Log ("Chronolabe: Activated");
 		labe.StartRecording (user);
 	}
 
+	public void UseEnd(GameObject user) {
+		
+	}
+
 	public void Nearby (GameObject user)
 	{
+		UISystem.Instance.SetTooltip ("test");
 	}
 
 	public string GetTooltip ()

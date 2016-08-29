@@ -32,7 +32,7 @@ public class UsableObjectCS : MonoBehaviour
 		}
 		if (!UISystem.Instance.CutSceneDisplaying ()) {
 			if (null != other.GetComponents<PlayerController> ()) {
-				target.SendMessage ("Nearby", other);
+				target.SendMessage ("Nearby", other.gameObject);
 			}
 		}
 	}
@@ -44,10 +44,13 @@ public class UsableObjectCS : MonoBehaviour
 		}
 	}
 
-	public void Use (GameObject user)
+	public void StopUsing(GameObject user) {
+		target.SendMessage ("UseEnd", user);
+	}
+	public void StartUsing (GameObject user)
 	{
 		if (!UISystem.Instance.CutSceneDisplaying ()) {
-			target.SendMessage ("Use", user);
+			target.SendMessage ("UseStart", user);
 		}
 	}
 }
