@@ -9,6 +9,7 @@ public class UsageController : MonoBehaviour
 
 	private UsableObjectCS collidingWith = null;
 
+	private bool isUsing = false;
 	private bool startedUsing = false;
 	private bool stoppedUsing = false;
 
@@ -31,8 +32,10 @@ public class UsageController : MonoBehaviour
 		if (!UISystem.Instance.CutSceneDisplaying ()) {
 			if (null != collidingWith) {
 				if (startedUsing) {
+					isUsing = true;
 					collidingWith.StartUsing (gameObject);
 				} else if (stoppedUsing) {
+					isUsing = false;
 					collidingWith.StopUsing (gameObject);
 				}
 			}
@@ -49,6 +52,9 @@ public class UsageController : MonoBehaviour
 
 	void OnTriggerExit2D (Collider2D other)
 	{
+		if ( isUsing && null != collidingWith) {
+			collidingWith.StopUsing (gameObject);
+		}
 		collidingWith = null;
 	}
 }
