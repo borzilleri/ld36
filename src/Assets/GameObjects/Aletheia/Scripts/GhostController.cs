@@ -70,7 +70,6 @@ public class GhostController : MonoBehaviour
 	void LateUpdate ()
 	{
 		if (!UISystem.Instance.CutSceneDisplaying ()) {
-			Debug.Log ("In lastupdate");
 			if (isRecording) {
 				Debug.LogFormat ("Recording frame: {0}", actionCount);
 				PlayerFrameAction action = new PlayerFrameAction ();
