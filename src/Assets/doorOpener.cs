@@ -4,43 +4,50 @@ using System.Collections;
 public class doorOpener : MonoBehaviour, UsableObject {
 
 	public int openOffset;
-	private bool open = false;
 	public float speed = 0.5f;
 
 	private Vector3 openPosition;
 	private Vector3 closePosition;
-	private float fraction = 0;
+
+	//start the door closed
+	private bool isClosed = true;
+	private float fraction = 1;
 
 	// Use this for initialization
 	void Start () {
 		openPosition = new Vector3 (transform.position.x, transform.position.y + openOffset, 0);
 		closePosition = transform.position;
-//		setDoorState (true);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (fraction < 1) {
+		if (isClosed && fraction < 1) {
 			fraction += Time.deltaTime * speed;
-			if (open) {
-				transform.position = Vector3.Lerp (closePosition, openPosition, fraction);
-			} else {
-				transform.position = Vector3.Lerp (openPosition, closePosition, fraction);
-			}
-
+		} else if(!isClosed && fraction > 0) {
+			fraction -= Time.deltaTime * speed;
 		}
+		transform.position = Vector3.Lerp (openPosition, closePosition, fraction);
 	}
 
-	void setDoorState(bool state) {
-		open = state;
-		fraction = 0;
+	void setDoorClosed(bool state) {
+		isClosed = state;
 	}
 
-	void Use( GameObject user) {
-		setDoorState (true);
+	public void Use( GameObject user) {
 	}
 
-	void Nearby(GameObject user) {
-		
+	public void UseStart( GameObject user) {
+		Debug.Log ("USE START IS BEING CALLED!!");
+		setDoorClosed (false);
 	}
+
+	public void UseEnd( GameObject user) {
+		Debug.Log ("USE END IS BEING CALLED!!");
+		setDoorClosed (true);
+	}
+
+	public void Nearby(GameObject user) {
+		Debug.Log ("NEARBY IS BEING CALLED!!");
+	}
+
 }
