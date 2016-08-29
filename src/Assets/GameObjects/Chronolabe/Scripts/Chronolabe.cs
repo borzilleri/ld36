@@ -10,7 +10,6 @@ public class Chronolabe : MonoBehaviour
 
 	public int ghostDurationSeconds = 3;
 
-	private AudioSource audio;
 	private List<GhostController> ghosts;
 
 	private bool _recording = false;
@@ -19,31 +18,41 @@ public class Chronolabe : MonoBehaviour
 		get { return _recording; }
 	}
 
+	bool _wipeAfterRecording = false;
+
 	void Start ()
 	{
-		audio = GetComponent<AudioSource> ();
 		ghosts = new List<GhostController> ();
 	}
 
-	void LateUpdate()
+	public void WarpComplete ()
 	{
-		if (!recording && audio.isPlaying) {
-			audio.Stop ();
+		_wipeAfterRecording = true;
+		/*
+		if (recording) {
+			EventManager.Instance.DispatchEvent (new EventMessage (EVT_CHRONOLABE_REC_STOP));
+			_recording = false;
 		}
-	}
-
-	public void WarpComplete() {
-		Reset ();
+		foreach (GhostController ghost in ghosts) {
+			Destroy (ghost.gameObject);
+		}
+		ghosts.Clear ();
+		*/
 	}
 
 	public void AddGhost (GhostController ghost)
 	{
-		if (_recording) {
+		if (recording) {
 			Debug.Log ("Adding Ghost to Chronolabe");
 			ghosts.Add (ghost);
+			EventManager.Instance.DispatchEvent (new EventMessage (EVT_CHRONOLABE_REC_STOP));
+			_recording = false;
+
+			if (_wipeAfterRecording) {
+				Reset ();
+				_wipeAfterRecording = false;
+			}
 		}
-		EventManager.Instance.DispatchEvent (new EventMessage (EVT_CHRONOLABE_REC_STOP));
-		_recording = false;
 	}
 
 	public void StartRecording (GameObject user)
@@ -56,15 +65,16 @@ public class Chronolabe : MonoBehaviour
 			}
 			user.GetComponent<GhostController> ().StartRecording (ghostDurationSeconds * 60, this);
 			EventManager.Instance.DispatchEvent (new EventMessage (EVT_CHRONOLABE_REC_START));
-			audio.Play ();
 		}
 	}
 
-	public void Reset() {
-		_recording = false;
-		foreach (GhostController ghost in ghosts) {
-			Destroy (ghost.gameObject);
+	public void Reset ()
+	{
+		if (!recording) {
+			foreach (GhostController ghost in ghosts) {
+				Destroy (ghost.gameObject);
+			}
+			ghosts = new List<GhostController> ();
 		}
-		ghosts.Clear ();
 	}
 }
