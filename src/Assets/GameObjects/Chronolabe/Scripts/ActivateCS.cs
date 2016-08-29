@@ -25,7 +25,7 @@ public class ActivateCS : MonoBehaviour, UsableObject, EventListener
 
 	public void Nearby (GameObject user)
 	{
-		UISystem.Instance.SetTooltip ("test");
+		//UISystem.Instance.SetTooltip ("test");
 	}
 
 	public string GetTooltip ()

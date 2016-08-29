@@ -29,6 +29,10 @@ namespace Assets.CommonScripts.Inventory
             }
         }
 
+		public bool HasItem(string itemName) {
+			return !string.IsNullOrEmpty (itemName) && items.ContainsKey (itemName);
+		}
+
         public bool Add(ObjectPickup itemToAdd)
         {
             if (itemToAdd == null)
