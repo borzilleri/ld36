@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ActivateCS : MonoBehaviour, UsableObject
+public class ActivateCS : MonoBehaviour, UsableObject, EventListener
 {
 	Chronolabe labe;
 
@@ -9,11 +9,12 @@ public class ActivateCS : MonoBehaviour, UsableObject
 	void Start ()
 	{
 		labe = GetComponentInParent<Chronolabe> ();
+		EventManager.Instance.AddListener (Chronolabe.EVT_CHRONOLABE_REC_START, gameObject);
+		EventManager.Instance.AddListener (Chronolabe.EVT_CHRONOLABE_REC_STOP, gameObject);
 	}
 
 	public void Use (GameObject user)
 	{
-		UISystem.Instance.NarrateInline ("Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\n\nIn id nisi in mi porttitor sagittis et at massa.", 0.1f, 3f);
 		Debug.Log ("Chronolabe: Activated");
 		labe.StartRecording (user);
 	}
@@ -25,5 +26,19 @@ public class ActivateCS : MonoBehaviour, UsableObject
 	public string GetTooltip ()
 	{
 		return labe.recording ? "" : "Use: Create a new record of your actions.";
+	}
+
+	public void ReceiveEvent (EventMessage evt)
+	{
+		switch (evt.type) {
+		case Chronolabe.EVT_CHRONOLABE_REC_START:
+			GetComponent<ParticleSystem> ().Play ();
+			break;
+		case Chronolabe.EVT_CHRONOLABE_REC_STOP:
+			GetComponent<ParticleSystem> ().Stop ();
+			break;
+		default:
+			break;
+		}
 	}
 }

@@ -39,7 +39,7 @@ public class EventManager : MonoBehaviour
 	{
 		if (_listeners.ContainsKey (evt.type)) {
 			foreach (GameObject l in _listeners[evt.type]) {
-				l.SendMessage ("ReceieveEvent", evt);
+				l.SendMessage ("ReceiveEvent", evt);
 			}
 		} else {
 			Debug.LogWarning ("No listeners configured for event: " + evt.type);
