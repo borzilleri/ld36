@@ -17,16 +17,18 @@ public class ActivateCS : MonoBehaviour, UsableObject, EventListener
 
 	public void UseStart (GameObject user)
 	{
-		Debug.Log ("Chronolabe: Activated");
 		labe.StartRecording (user);
-		audio.Play ();
+		if (!audio.isPlaying) {
+			audio.Play ();
+		}
 	}
 
-	public void UseEnd(GameObject user) {
-		
+	public void UseEnd (GameObject user)
+	{
 	}
 
-	void LateUpdate() {
+	void LateUpdate ()
+	{
 		if (!labe.recording && audio.isPlaying) {
 			audio.Stop ();
 		}
