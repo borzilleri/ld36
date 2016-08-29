@@ -3,9 +3,13 @@ using UnityEngine;
 
 public class ObjectPickup : MonoBehaviour, Pickupable {
 
-    public void Pickup(GameObject player)
+    // Add this controller to any game object that the player can pick up and hold in their inventory.  To enable
+    // the player to pick up the item, add the PlayerPickup controller (Assets/CommonScripts/Inventory/PlayerPickup.cs)
+    // to the player's controllers.
+
+    public void Pickup(GameObject user)
     {
-        PlayerInventory inventory = (PlayerInventory) player.GetComponent<PlayerPickup>().playerInventory;
+        PlayerInventory inventory = (PlayerInventory) user.GetComponent<PlayerPickup>().playerInventory;
 
         if (inventory == null)
         {
@@ -18,12 +22,15 @@ public class ObjectPickup : MonoBehaviour, Pickupable {
         Debug.Log("Hiding " + gameObject);
         this.gameObject.SetActive(false);
 
-        InventoryUIController uiInventory = (InventoryUIController)Transform.FindObjectOfType<InventoryUIController>();
-        if (uiInventory == null)
+        if (!user.GetComponent<PlayerController>().isGhost)
         {
-            Debug.Log("Couldn't find InventoryUIController");
-            return;
+            InventoryUIController uiInventory = (InventoryUIController)Transform.FindObjectOfType<InventoryUIController>();
+            if (uiInventory == null)
+            {
+                Debug.Log("Couldn't find InventoryUIController");
+                return;
+            }
+            uiInventory.AddToInventoryPanel(this);
         }
-        uiInventory.AddToInventoryPanel(this);
     }
 }

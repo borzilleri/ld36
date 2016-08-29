@@ -3,27 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
+[RequireComponent(typeof(GhostController))]
 public class UsageController : MonoBehaviour
 {
-	private Rigidbody2D rb2d;
-
-	private UsableObjectCS collidingWith = null;
-
 	private bool isUsing = false;
 	private bool startedUsing = false;
 	private bool stoppedUsing = false;
 
-	// Use this for initialization
-	void Start ()
+	private GhostController _input;
+	private UsableObjectCS collidingWith = null;
+
+	void Awake ()
 	{
-		rb2d = GetComponent<Rigidbody2D> ();
+		_input = GetComponent<GhostController> ();
 	}
 
 	void Update ()
 	{
 		if (!UISystem.Instance.CutSceneDisplaying ()) {
-			startedUsing = Input.GetButtonDown ("Action");
-			stoppedUsing = Input.GetButtonUp ("Action");
+			startedUsing = _input.GetKeyDown (KeyCode.Space);
+			stoppedUsing = _input.GetKeyUp (KeyCode.Space);
+			isUsing = _input.GetKey (KeyCode.Space);
 		}
 	}
 

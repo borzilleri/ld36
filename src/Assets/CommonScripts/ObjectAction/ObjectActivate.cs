@@ -22,8 +22,6 @@ public class ObjectActivate : MonoBehaviour, UsableObject
     public int triggerCount = 1;
     public bool repeatTrigger = false;
 
-    bool isInUse = false;
-
     private void DoActivateTrigger()
     {
         triggerCount--;

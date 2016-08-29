@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryUIController : MonoBehaviour {
 
     public GameObject inventoryPanelPrefab;
+    public Image imagePrefab;
+
     private GameObject activeInventoryPanel;
 
     private static bool isInitialized = false;
 
-	// Use this for initialization
 	void Start () {
-        if (isInitialized)
+        if (isInitialized) // Make sure there is only ever one of these
         {
             return;
         }
@@ -18,12 +20,7 @@ public class InventoryUIController : MonoBehaviour {
 
         activeInventoryPanel = Instantiate(inventoryPanelPrefab);
         activeInventoryPanel.transform.SetParent(gameObject.transform, false);
-        //inventoryPanel.SetActive(false);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+        activeInventoryPanel.SetActive(false);
 	}
 
     public void AddToInventoryPanel(ObjectPickup inventoryItem)
@@ -33,16 +30,34 @@ public class InventoryUIController : MonoBehaviour {
             activeInventoryPanel.SetActive(true);
         }
 
-        inventoryItem.transform.SetParent(activeInventoryPanel.transform);
+        SpriteRenderer itemSpriteRenderer = inventoryItem.GetComponent<SpriteRenderer>();
+
+        Image inventoryItemImage = Instantiate(imagePrefab);
+        inventoryItemImage.sprite = itemSpriteRenderer.sprite;
+        inventoryItemImage.material = itemSpriteRenderer.material;
+        inventoryItemImage.color = itemSpriteRenderer.color;
+        inventoryItemImage.name = itemSpriteRenderer.name;
+
+        inventoryItemImage.transform.SetParent(activeInventoryPanel.transform, false);
     }
 
     public void RemoveFromInventoryPanel(ObjectPickup inventoryItem, Transform slot)
     {
-        inventoryItem.transform.SetParent(slot);
+        SpriteRenderer itemSprite = inventoryItem.GetComponent<SpriteRenderer>();
+        SpriteRenderer[] spritesInInventory = activeInventoryPanel.GetComponentsInChildren<SpriteRenderer>();
+        foreach(var item in spritesInInventory)
+        {
+            Debug.Log("Found " + item.name + " in inventory");
 
-        ObjectPickup[] itemsInInventory = activeInventoryPanel.GetComponentsInChildren<ObjectPickup>(true);
+            if (itemSprite.name == item.name)
+            {
+                Debug.Log("Match detected with " + itemSprite);
+            }
+        }
 
-        if (itemsInInventory.Length == 0)
+        //ObjectPickup[] itemsInInventory = activeInventoryPanel.GetComponentsInChildren<ObjectPickup>(true);
+
+        if (spritesInInventory.Length == 0)
         {
             activeInventoryPanel.SetActive(false);
         }

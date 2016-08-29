@@ -4,10 +4,11 @@ using UnityEngine;
 
 namespace Assets.CommonScripts.Inventory
 {
+    // 
+    //  TODO - Stacks of multiple identical items
     public class PlayerInventory
     {
         private Dictionary<string, ObjectPickup> items;
-        private InventoryUIController inventoryDisplay;
 
         public PlayerInventory()
         {
@@ -64,11 +65,6 @@ namespace Assets.CommonScripts.Inventory
             {
                 Debug.Log("Inventory has " + item.Key);
             }
-        }
-
-        private void UpdateInventoryRepresentation()
-        {
-
         }
     }
 }
