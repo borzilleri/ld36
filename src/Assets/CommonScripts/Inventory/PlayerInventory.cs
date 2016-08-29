@@ -7,7 +7,6 @@ namespace Assets.CommonScripts.Inventory
     public class PlayerInventory
     {
         private Dictionary<string, ObjectPickup> items;
-        private InventoryUIController inventoryDisplay;
 
         public PlayerInventory()
         {
@@ -64,11 +63,6 @@ namespace Assets.CommonScripts.Inventory
             {
                 Debug.Log("Inventory has " + item.Key);
             }
-        }
-
-        private void UpdateInventoryRepresentation()
-        {
-
         }
     }
 }
