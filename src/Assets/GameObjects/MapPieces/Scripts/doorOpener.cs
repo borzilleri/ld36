@@ -63,17 +63,17 @@ public class doorOpener : MonoBehaviour, UsableObject {
 	}
 
 	public void UseStart( GameObject user) {
-		Debug.Log ("USE START IS BEING CALLED!!");
+//		Debug.Log ("USE START IS BEING CALLED!!");
 		setDoorClosed (false);
 	}
 
 	public void UseEnd( GameObject user) {
-		Debug.Log ("USE END IS BEING CALLED!!");
+//		Debug.Log ("USE END IS BEING CALLED!!");
 		setDoorClosed (true);
 	}
 
 	public void Nearby(GameObject user) {
-		Debug.Log ("NEARBY IS BEING CALLED!!");
+//		Debug.Log ("NEARBY IS BEING CALLED!!");
 	}
 
 }
