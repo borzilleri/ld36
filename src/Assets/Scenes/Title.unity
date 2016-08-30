@@ -175,10 +175,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1220581021}
   m_RootOrder: 3
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 60}
-  m_SizeDelta: {x: 2804, y: 300}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 150}
+  m_SizeDelta: {x: 1852, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &382584822
 MonoBehaviour:
@@ -212,8 +212,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Richard Borland  \u2022  Jonathan Borzilleri  \u2022  Tim Sendgikoski  \u2022
-    \ Lenny Urbanowski"
+  m_Text: "Richard Borland    Jonathan Borzilleri \nTim Sendgikoski    Lenny Urbanowski"
 --- !u!222 &382584823
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -253,7 +252,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -119}
-  m_SizeDelta: {x: -458, y: 300}
+  m_SizeDelta: {x: -458, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &386264587
 MonoBehaviour:
@@ -281,7 +280,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 200
-    m_Alignment: 4
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 0
@@ -843,7 +842,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -261}
-  m_SizeDelta: {x: 900, y: 300}
+  m_SizeDelta: {x: 900, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2106102684
 MonoBehaviour:
