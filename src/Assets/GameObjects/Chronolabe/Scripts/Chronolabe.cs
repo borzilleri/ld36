@@ -18,7 +18,7 @@ public class Chronolabe : MonoBehaviour
 		get { return _recording; }
 	}
 
-	bool _wipeAfterRecording = false;
+	bool _wipeBeforeRecording = false;
 
 	void Start ()
 	{
@@ -27,7 +27,7 @@ public class Chronolabe : MonoBehaviour
 
 	public void WarpComplete ()
 	{
-		_wipeAfterRecording = true;
+		_wipeBeforeRecording = true;
 		/*
 		if (recording) {
 			EventManager.Instance.DispatchEvent (new EventMessage (EVT_CHRONOLABE_REC_STOP));
@@ -47,17 +47,16 @@ public class Chronolabe : MonoBehaviour
 			ghosts.Add (ghost);
 			EventManager.Instance.DispatchEvent (new EventMessage (EVT_CHRONOLABE_REC_STOP));
 			_recording = false;
-
-			if (_wipeAfterRecording) {
-				Reset ();
-				_wipeAfterRecording = false;
-			}
 		}
 	}
 
 	public void StartRecording (GameObject user)
 	{
 		if (!_recording) {
+			if (_wipeBeforeRecording) {
+				Reset ();
+				_wipeBeforeRecording = false;
+			}			
 			Debug.Log ("Activating chronolabe");
 			_recording = true;
 			foreach (var ghost in ghosts) {

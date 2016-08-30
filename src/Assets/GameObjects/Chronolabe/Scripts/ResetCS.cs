@@ -32,6 +32,7 @@ public class ResetCS : MonoBehaviour, UsableObject
 
 	public void UseStart (GameObject user)
 	{
+		Debug.Log ("Use start in reset");
 		if (null != labe && !labe.recording) {
 			labe.Reset ();
 			if (audio.isPlaying) {
