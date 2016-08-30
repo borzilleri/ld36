@@ -7,4 +7,4 @@
 *.wav				-text
 *.mp3				-text
 *.ogg				-text
-
+*.zip               -text
