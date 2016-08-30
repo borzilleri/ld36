@@ -106,7 +106,7 @@ public class GhostController : MonoBehaviour
 		return PlayerAction.None;
 	}
 
-	void LateUpdate ()
+	void FixedUpdate ()
 	{
 		if (!UISystem.Instance.CutSceneDisplaying ()) {
 			if (isRecording) {

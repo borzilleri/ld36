@@ -66,7 +66,7 @@ public class CharacterControllerSideScroll : MonoBehaviour
 
 
 	// the Update loop contains a very simple example of moving the character around and controlling the animation
-	void Update ()
+	void FixedUpdate ()
 	{
 		if (_controller.isGrounded)
 			_velocity.y = 0;
