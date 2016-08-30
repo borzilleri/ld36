@@ -76,6 +76,7 @@ public class doorOpener : MonoBehaviour, UsableObject {
 	public void Nearby(GameObject user) {
 		if (!_triggeredNarration) {
 			UISystem.Instance.NarrateInline (narration, 0.05f, 1f);
+			_triggeredNarration = true;
 		}
 //		Debug.Log ("NEARBY IS BEING CALLED!!");
 	}

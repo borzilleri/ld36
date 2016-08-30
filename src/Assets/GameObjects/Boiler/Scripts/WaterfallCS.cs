@@ -25,6 +25,7 @@ public class WaterfallCS : MonoBehaviour, UsableObject
 		}
 		if (!_narration) {
 			UISystem.Instance.NarrateInline (narration, 0.05f, 1f);
+			_narration = true;
 		}
 	}
 

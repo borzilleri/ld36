@@ -17,9 +17,9 @@ public class FireController : MonoBehaviour, UsableObject {
 
 
 	bool _narration = false;
-	string narration = @"So this is what lit the fire…
+	string narration = @"So this is what lit the fire...
 
-It looks like I'll have to get all of this working at once. I'll need some help to keep the water and the fire on, though…";
+It looks like I'll have to get all of this working at once. I'll need some help to keep the water and the fire on, though.";
 		
 	public void UseStart (GameObject user) 
 	{
@@ -29,6 +29,7 @@ It looks like I'll have to get all of this working at once. I'll need some help 
 		}
 		if (!_narration) {
 			UISystem.Instance.NarrateInline (narration, 0.05f, 1f);
+			_narration = true;
 		}
 	}
 
