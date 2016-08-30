@@ -32,7 +32,14 @@ public class HiddenTempleDoorController : MonoBehaviour, UsableObject {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		Debug.Log ("and aawwaaaay we go!!!");
+		string _endNarration = @"Aletheia proceeds inside the Musaeum. It is a shadow of its former glory: moldy bookshelves lie in piles of rubble, their scrolls ruined. The building appears to have been torn in half, its walls leaning on one another for support rather than existing as a single solid structure. The mosaics and murals have all worn away to pale ghosts.
+
+Fortunately, she finds a set of intact scrolls with the information she needs. Unfurling them, she studies their schematics and learns the configuration she needs to set the chronolabe to in order to enable time travel.
+
+It is clear to Aletheia what she needs to do. She hopes that the rest of the village is intact enough – or the time-warps accommodating enough – that she can acquire what she needs and get home.";
+
+		UISystem.Instance.DisplayCutScene (_endNarration, 0.02f, 3f, "Title");
+		
 	}
 
 	public void UseStart (GameObject user) {

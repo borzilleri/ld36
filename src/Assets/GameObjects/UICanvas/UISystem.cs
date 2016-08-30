@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class UISystem : MonoBehaviour
 {
@@ -40,14 +41,14 @@ public class UISystem : MonoBehaviour
 		StartCoroutine (animateInlineNarration (text, charDelay, waitTime));
 	}
 
-	public void DisplayCutScene (string text, float charDelay, float waitTime)
+	public void DisplayCutScene (string text, float charDelay, float waitTime, string nextScene = null)
 	{
 		if (narratingInline) {
 			inlineNarrativeRegion.gameObject.SetActive (false);
 			StopCoroutine ("animateText");
 		}
 		if (!cutSceneDisplaying) {
-			StartCoroutine (animateCutScene (text, charDelay, waitTime));
+			StartCoroutine (animateCutScene (text, charDelay, waitTime, nextScene));
 		}
 	}
 
@@ -80,12 +81,15 @@ public class UISystem : MonoBehaviour
 	}
 
 
-	public IEnumerator animateCutScene(string text, float charDelay, float waitTime) {
+	public IEnumerator animateCutScene(string text, float charDelay, float waitTime, string nextScene = null) {
 		cutSceneDisplaying = true;
 		cutSceneBackground.SetActive (true);
 		yield return StartCoroutine (animateText (cutSceneRegion, text, charDelay, waitTime));
 		cutSceneBackground.SetActive (false);
 		cutSceneDisplaying = false;
+		if (null != nextScene) {
+			SceneManager.LoadScene (nextScene);
+		}
 	}
 
 	IEnumerator animateText (Text region, string text, float charDelay, float postDelay)
